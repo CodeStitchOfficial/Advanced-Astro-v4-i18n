@@ -1,4 +1,6 @@
 ---
+import LanguagePicker from "./LanguagePicker.astro";
+import DarkModeToggle from "./DarkModeToggle.astro";
 import client from "@data/client.json";
 import { getCurrentYear } from "@libs/utils"
 
@@ -8,7 +10,7 @@ const currentYear = getCurrentYear()
 <!-- ============================================ --><!--                   Footer                     --><!-- ============================================ -->
 <footer id="footer">
   <div class="container">
-    <div class="left-section">
+    <section class="left-section">
       <a class="logo" href="/"
         ><img
           loading="lazy"
@@ -17,14 +19,14 @@ const currentYear = getCurrentYear()
           alt="logo"
           width="264"
           height="78"
-        /></a
-      >
+        />
+      </a>
       <p>
         Extra content if you need it, if not you can delete this whole p tag. I
         usually do.
       </p>
-    </div>
-    <div class="right-section">
+    </section>
+    <section class="right-section">
       <div class="lists">
         <ul>
           <li>
@@ -79,14 +81,20 @@ const currentYear = getCurrentYear()
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   </div>
 
-  <div class="credit">
-    <span>Designed and Hand Coded by</span>
-    <a href="/" target="_blank" rel="noopener">Your Company Name</a>
-    <span class="copyright"> Copyright {currentYear} - Present</span>
-  </div>
+  <section class="credit">
+    <div>
+      <span>Designed and Hand Coded by</span>
+      <a href="/" target="_blank" rel="noopener">Your Company Name</a>
+      <span class="copyright"> Copyright {currentYear} - Present</span>
+    </div>
+    <div class="settings">
+      <DarkModeToggle />
+      <LanguagePicker />
+    </div>
+  </section>
 </footer>
 
 <style lang="less">
@@ -220,6 +228,10 @@ const currentYear = getCurrentYear()
       margin: auto;
       margin-top: (100/16rem);
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2em;
 
       a {
         font-size: (16/16rem);
@@ -234,6 +246,10 @@ const currentYear = getCurrentYear()
       .copyright {
         font-size: (16/16rem);
         display: block;
+      }
+
+      .settings {
+        display: flex;
       }
     }
   }
@@ -323,6 +339,9 @@ const currentYear = getCurrentYear()
     }
 
     .credit {
+      flex-direction: row;
+      justify-content: space-between;
+
       .copyright {
         display: inline-block;
       }

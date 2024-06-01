@@ -4,7 +4,7 @@
     This advanced kit includes a pre-configured Astro setup, along with five pages filled with CodeStitch components. Everything is ready to go right from the start, offering a fantastic introduction to the advantages of a Static Site Generator, complete with LESS preprocessing and a multi-language site powered by Astro’s internationalization (i18n) routing. 
     <br/>
     <br/>
-    <a href="https://beginner-astro-kit.netlify.app/" target="_blank">View Live Result</a>
+    <a href="https://advanced-astro-kit.netlify.app/" target="_blank">View Live Result</a>
   </p>
 
 ## Table of Contents
@@ -20,9 +20,9 @@
 - [Expanding the Project](#expandingTheProject)
   - [Reusing Code](#reusingCode)
   - [Adding More Pages](#addingMorePages)
+  - [i18n](#i18n)
   - [Navigation via Front Matter](#navigationViaFrontMatter)
   - [Built-in Astro components](#builtinastrocomponents)
-  - [Configuring the CMS](#configuringTheCms)
   - [Astro Content Collections](#AstroContentCollections)
 - [Deployment](#deployment)
 - [Conclusion](#conclusion)
@@ -92,19 +92,27 @@ This kit ships the following packages:
 |   |   |—— images/
 |   |   |   ── blog/
 |   ├── components/
-|   ├── content/
-|   |   |—— config.ts
-|   |   └── blog/
-│   ├── _data/
+│   ├── data/
 │   │   ├── client.json
 │   │   └── navData.json
-│   ├── layouts/
-│   │   └── BaseLayout.astro
+│   ├── i18n/
+│   │   ├── defaultLangOptions.ts
+│   │   └── localizedUrl.ts
+│   ├── icons/
 |   ├── libs/
 |   |   └── utils.js
+│   ├── layouts/
+│   │   └── BaseLayout.astro
 │   ├── pages/
-|   |   └── blog/
-|   |   └── projects/
+|   |   └── fr/
+│   │   │   |—— index.astro
+│   │   │   |—— about.astro
+│   │   │   |—— contact.astro
+│   │   │   └── projects/
+|   |   |── index.astro
+|   |   |—— about.astro
+|   |   |—— contact.astro
+│   │   └── projects/
 |   └── styles/
 ├── .astro.config.mjs
 ├── .postcss.config.cjs
@@ -361,20 +369,19 @@ This kit demonstrates the use of the built-in `<Picture />` component, [for whic
  * Astro's `<Picture />` components must be manually written to replace stitches. On the other hand, they automatically process and optimize assets, which allows the developper to skip the resizing and reformatting preparation work.
 
 
-<a name="configuringTheCms"></a>
+<a name="i18n"></a>
 
-### Configuring the CMS
+### i18n
 
-In `public/admin/`, you'll find a `config.yml` file which contains the configuration for the blog. While this project is set up to work with a blog out of the box, you are welcome to make changes using
-<a href="https://decapcms.org/docs/add-to-your-site/#configuration">Decap CMS'</a> documentation.
+In `astro.config.mjs/`, you'll find a `i18n` object which contains the configuration for the blog. This project is set up to work with two languages out of the box. English is the default language, and French is the secondary language. You are welcome to make changes using
+<a href="https://docs.astro.build/en/guides/internationalization/#_top">Astro i18n</a> documentation.
 
-Blog content lives in `/src/content/blog` in the form of markdown files, with a front matter similar to that of the pages. MDX files can also be used if you want to include JSX components. The title, description, and tags are defined in the frontmatter of the markdown. The permalink will be the same as the file name.
+Organize your content folders with localized content by language. Create individual `/[locale]/` folders anywhere within `src/pages/` and Astro’s file-based routing will create your pages at corresponding URL paths. Pages for your default language (here, `"en"`) stay at the root of `src/pages/`. Your folder names must match the items in locales exactly.
 
-Files uploaded through the dashboard's media library will be stored in `src/assets/images/blog` so that they can be accessed and optimised by Astro components if you wish.
+Modify `src/i18n/defaultLanguageOptions` with the correct locales and labels to update the LanguageSelect component.
 
-When `npm start` is run, a proxy server for the CMS is spun up on `localhost:8081`. That can often mean you run into errors if `localhost:8080` is already taken, so look out for that. You can locally access the blog via navigating to the /admin path. All blog content can be easily created, updated and deleted via this admin panel, and is the very system that your clients can use to manage their website without your involvement. 
+It is important to note that this template does not support `"prefixDefaultLocale: true"`. 
 
-Everything on the blog should be fairly intuitive, but feel free to experiment with using this panel first. With this kit, you can add _featured_ to the comma-separated list of tags to have them show up as so in the frontend.
 
 <a name="astroContentCollections"></a>
 

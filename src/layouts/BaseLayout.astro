@@ -7,13 +7,13 @@ import "@styles/root.less";
 import "@styles/dark.less";
 
 const {description, title} = Astro.props;
-
+const currentLocale = Astro.currentLocale
 ---
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
-<html lang="en">
+<html lang={currentLocale}>
         <head>
             <!-- View Transitions support -->
-            <ViewTransitions />
+            <!-- <ViewTransitions /> -->
 
             <!-- Standard meta tags -->
             <meta charset="UTF-8">
@@ -62,26 +62,6 @@ const {description, title} = Astro.props;
             <!-- Sitewide Scripts -->
             <script defer src="/js/dark.js"></script>
             <script defer src="/js/nav.js"></script>
-
-            <!-- Decap CMS scripts -->
-            {Astro.url.pathname === "/" &&
-                <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-                <script defer>
-                    if (window.netlifyIdentity) {
-                        window
-                            .netlifyIdentity
-                            .on('init', (user) => {
-                                if (!user) {
-                                    window
-                                        .netlifyIdentity
-                                        .on('login', () => {
-                                            document.location.href = '/admin/';
-                                        });
-                                }
-                            });
-                    }
-                </script>
-            }
         </head>
         <body>
             <!--Screen reader skip main nav-->

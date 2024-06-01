@@ -1,0 +1,34 @@
+---
+import { languages } from "@i18n/defaultLangOptions";
+import {localizedUrl} from "@i18n/localizedUrl"
+const currentLocale = Astro.currentLocale
+
+function localizedPathname(locale: string | undefined): string {
+	return localizedUrl(Astro.url, locale).pathname;
+}
+
+---
+
+<select name="language-select" id="language-select">
+    {
+        languages.map(lang => (
+            <option 
+                value={localizedPathname(lang.value)} 
+                selected={lang.value  === currentLocale}
+            >
+                {lang.name}
+            </option>
+        ))
+    } 
+</select>
+
+<script>
+    const languageSelect = document.getElementById("language-select")  as HTMLSelectElement
+    if (languageSelect) {
+        languageSelect.addEventListener('change', (e) => {
+            if (e.currentTarget instanceof HTMLSelectElement) {
+                window.location.pathname = e.currentTarget.value;
+            }
+        });
+    }
+</script>
