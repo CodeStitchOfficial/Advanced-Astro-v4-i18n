@@ -1,0 +1,27 @@
+{
+	"home": "Home",
+	"about": "About",
+    "projects": "Projects",
+    "project-1": "Project 1",
+    "project-2": "Project 2",
+	"cta": "Contact Us",
+    "quote": "Get Free Quote",
+    "estimate": "Get an estimate now",
+    "ctaComponent": {
+        "title1": "Get it done",
+        "title2": "With us today",
+        "message": "Say something catchy, informative, and encouraging to click the button to go to the contact page. I like to add these to the bottom of all pages.",
+        "cta":"Get an estimate now"
+    },
+    "about-page": {
+        "landing": "About",
+        "topper": "About",
+        "title": "About Company Title",
+        "p-1": "Our company was created In consequat tincidunt turpis sit amet imperdiet. Praesent Class officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent nonatourean olei aptent taciti sociosqu ad litora torquent per.",
+        "p-2": "We believe that In consequat tincidunt turpis sit amet imperdiet. Praesent Class officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent nonatourean olei aptent taciti sociosqu ad litora torquent per.",
+        "p-3": "It's important In consequat tincidunt turpis sit amet imperdiet.",
+        "rank": "CEO-Founder",
+        "cta": "Our projects"    
+    }
+    
+}

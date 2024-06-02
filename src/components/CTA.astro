@@ -1,16 +1,17 @@
-<!-- ============================================ --><!--             Final Call to Action             --><!-- ============================================ -->
+---
+import { t } from "i18n:astro";
+---
 <section id="cta">
   <div class="container">
     <h2 class="title">
-      Get It Done
+      {t("ctaComponent.title1")}
       <br />
-       With Us Today
+      {t("ctaComponent.title2")}
     </h2>
     <p>
-      Say something catchy, informative, and encouraging to click the button to
-      go to the contact page. I like to add these to the bottom of all pages.
+      {t("ctaComponent.message")}
     </p>
-    <a href="/contact" class="cs-button-solid">Get an Estimate Now</a>
+    <a href="/contact" class="cs-button-solid">{t("ctaComponent.cta")}</a>
   </div>
   <picture>
     <source

@@ -1,11 +1,8 @@
 ---
 import navData from "@data/navData"
 import { Icon } from 'astro-icon/components';
-import LanguagePicker from "./LanguagePicker.astro";
-import type { Lang } from "@i18n/defaultLangOptions";
-import { getRelativeLocaleUrl } from "astro:i18n";
-
-const currentLocale = Astro.currentLocale as Lang
+import { getLocalePath, t } from "i18n:astro";
+import LocaleSwitcher from "./LocaleSwitcher.astro";
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
@@ -36,7 +33,7 @@ const currentLocale = Astro.currentLocale as Lang
       <!-- This also allows for easy substitution of CodeStitch navigations. Just replace the .cs-ul-wrapper in the new navigation with this one -->
       <div class="cs-ul-wrapper">
         <ul id="cs-expanded-ul" class="cs-ul">
-          {navData[currentLocale].map((entry) => (
+          {navData.map((entry) => (
             <li
               class:list={[
                 "cs-li",
@@ -54,20 +51,20 @@ const currentLocale = Astro.currentLocale as Lang
                     { "cs-active": Astro.url.pathname.includes(entry.url)},
                   ]}
                 >
-                  {entry.key}
+                  {t(entry.key)}
                   <Icon name="mdi--caret" class="cs-drop-icon" />
                 </button>
               ) : (
                 // If entry does not have children in navData.json, create an anchor
                 <a
-                  href={getRelativeLocaleUrl(currentLocale, entry.url)}
+                  href={getLocalePath(entry.url)}
                   class:list={[
                     "cs-li-link",
-                    { "cs-active": Astro.url.pathname === entry.url },
+                    { "cs-active": Astro.url.pathname === getLocalePath(entry.url) },
                   ]}
-                  aria-current={Astro.url.pathname === entry.url ? "page" : undefined}
+                  aria-current={Astro.url.pathname === getLocalePath(entry.url) ? "page" : undefined}
                 >
-                  {entry.key}
+                  {t(entry.key)}
                 </a>
               )}
               
@@ -77,11 +74,11 @@ const currentLocale = Astro.currentLocale as Lang
                   {entry.children.map((child) => (
                     <li class="cs-drop-li">
                       <a 
-                        href={getRelativeLocaleUrl(currentLocale, child.url)}
+                        href={getLocalePath(child.url)}
                         class="cs-li-link cs-drop-link"
-                        aria-current={Astro.url.pathname === child.url ? "page" : undefined}
+                        aria-current={Astro.url.pathname === getLocalePath(child.url) ? "page" : undefined}
                       >
-                        {child.key}
+                        {t(child.key)}
                       </a>
                     </li>
                   ))}
@@ -93,6 +90,7 @@ const currentLocale = Astro.currentLocale as Lang
       </div>
     </nav>
     <a href="/contact" class="cs-button-solid cs-nav-button">Contact Us</a>
+    <LocaleSwitcher />
     
   </div>
 </header>

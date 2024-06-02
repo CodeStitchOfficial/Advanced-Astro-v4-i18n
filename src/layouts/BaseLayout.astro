@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import I18nClient from "@astrolicious/i18n/components/I18nClient.astro"
 import client from "@data/client.json";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -12,6 +13,8 @@ const currentLocale = Astro.currentLocale
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
 <html lang={currentLocale}>
         <head>
+            <!-- i18n support -->
+            <I18nClient />
             <!-- View Transitions support -->
             <!-- <ViewTransitions /> -->
 

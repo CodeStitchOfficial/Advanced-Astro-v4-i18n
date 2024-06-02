@@ -3,10 +3,12 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import client from "@data/client.json";
 import Landing from "@components/Landing.astro";
 
+import { t } from "i18n:astro";
+
 ---
 
 <BaseLayout
-  title="Contact"
+  title={t("contact:landing")}
   description="Meta description for the page"
 >
   <!-- ============================================ -->
@@ -14,7 +16,7 @@ import Landing from "@components/Landing.astro";
   <!-- ============================================ -->
 
   <Landing 
-    title="Contact"
+    title={t("contact:landing")}
   />
 
   <!-- ============================================ -->
@@ -25,74 +27,72 @@ import Landing from "@components/Landing.astro";
     <div class="cs-container">
       <form id="cs-form" name="Contact Form" method="post">
         <div class="cs-content">
-          <span class="cs-topper">Contact</span>
-          <h2 class="cs-title">Get in Touch</h2>
+          <span class="cs-topper">{t("contact:topper")}</span>
+          <h2 class="cs-title">{t("contact:title")}</h2>
           <p class="cs-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ridiculus
-            elementum ullamcorper ipsum porttitor aliquam. Id magna urna
-            ultrices odio pulvinar. Sed ut.
+            {t("contact:p-1")}
           </p>
         </div>
         <label>
-          Name
+          {t("contact:form.name")}
           <input
             required
             type="text"
             id="name"
             name="name"
-            placeholder="Name"
+            placeholder={t("contact:form.name")}
           />
         </label>
         <label>
-          Email
+          {t("contact:form.email")}
           <input
             required
             type="text"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder={t("contact:form.email")}
           />
         </label>
         <label>
-          Phone
+          {t("contact:form.phone")}
           <input
             required
             type="text"
             id="phone"
             name="phone"
-            placeholder="Phone"
+            placeholder={t("contact:form.phone")}
           />
         </label>
         <label>
-          How Did You Find Us
+          {t("contact:form.how")}
           <input
             type="text"
             id="find"
             name="find-us"
-            placeholder="How did you find us?"
+            placeholder={t("contact:form.how")}
           />
         </label>
         <label class="cs-label-message">
-          Message
+          {t("contact:form.message")}
           <textarea
             required
             name="Message"
             id="message"
-            placeholder="Write message..."></textarea>
+            placeholder={t("contact:form.message-placeholder")}></textarea>
         </label>
-        <button class="cs-button-solid" type="submit">Submit Message</button>
+        <button class="cs-button-solid" type="submit">{t("contact:cta")}</button>
       </form>
       <div class="cs-right-section">
         <!--Email-->
-        <span class="cs-header">Email</span>
+        <span class="cs-header">{t("contact:form.email")}</span>
         <a class="cs-link" href={`mailto:${client.email}`}>{client.email}</a>
         <!--Phone-->
-        <span class="cs-header">Phone</span>
+        <span class="cs-header">{t("contact:form.phone")}</span>
         <a class="cs-link" href={`tel:${client.phoneForTel}`}
           >{client.phoneFormatted}</a
         >
         <!--Address-->
-        <span class="cs-header">Address</span>
+        <span class="cs-header">{t("contact:form.address")}</span>
         <a class="cs-link" href={client.address.mapLink}>
           {client.address.lineOne},
           <br />

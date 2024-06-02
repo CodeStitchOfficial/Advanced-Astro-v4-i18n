@@ -1,0 +1,16 @@
+---
+import { getLocale, getSwitcherData } from "i18n:astro";
+
+const locale = getLocale();
+const data = getSwitcherData();
+---
+
+<select class="border border-gray-300 rounded-md" onchange="location = this.value;">
+  {
+    data.map((e) => (
+      <option value={e.href} selected={e.locale === locale} class="bg-white hover:bg-gray-100">
+        {e.locale}
+      </option>
+    ))
+  }
+</select>

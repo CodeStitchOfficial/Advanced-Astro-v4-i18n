@@ -373,15 +373,16 @@ This kit demonstrates the use of the built-in `<Picture />` component, [for whic
 
 ### i18n
 
-In `astro.config.mjs/`, you'll find a `i18n` object which contains the configuration for the blog. This project is set up to work with two languages out of the box. English is the default language, and French is the secondary language. You are welcome to make changes using
+<!-- In `astro.config.mjs/`, you'll find a `i18n` object which contains the configuration for the blog. This project is set up to work with two languages out of the box. English is the default language, and French is the secondary language. You are welcome to make changes using
 <a href="https://docs.astro.build/en/guides/internationalization/#_top">Astro i18n</a> documentation.
 
 Organize your content folders with localized content by language. Create individual `/[locale]/` folders anywhere within `src/pages/` and Astro’s file-based routing will create your pages at corresponding URL paths. Pages for your default language (here, `"en"`) stay at the root of `src/pages/`. Your folder names must match the items in locales exactly.
 
 Modify `src/i18n/defaultLanguageOptions` with the correct locales and labels to update the LanguageSelect component.
 
-It is important to note that this template does not support `"prefixDefaultLocale: true"`. 
-
+It is important to note that this template does not support `"prefixDefaultLocale: true"`.  -->
+ 
+Internationalization is powered by [I18n for Astro integration](https://astro-i18n.netlify.app/). This project is set up to work with two languages out of the box, English (default language) and French. 
 
 <a name="astroContentCollections"></a>
 
