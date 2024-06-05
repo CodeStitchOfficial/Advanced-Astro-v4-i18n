@@ -1,8 +1,8 @@
 ---
-import LanguagePicker from "./LocaleSwitcher.astro";
-import DarkModeToggle from "./DarkModeToggle.astro";
 import client from "@data/client.json";
+import navData from "@data/navData"
 import { getCurrentYear } from "@libs/utils"
+import { getLocalePath, t } from "i18n:astro";
 
 const currentYear = getCurrentYear()
 ---
@@ -22,35 +22,24 @@ const currentYear = getCurrentYear()
         />
       </a>
       <p>
-        Extra content if you need it, if not you can delete this whole p tag. I
-        usually do.
+        {t("footer.p")}
       </p>
     </section>
     <section class="right-section">
       <div class="lists">
         <ul>
           <li>
-            <h2>Information</h2>
+            <h2>{t("footer.information")}</h2>
           </li>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/about">About Us</a>
-          </li>
-          <li>
-            <a href="/projects">Projects</a>
-          </li>
-          <li>
-            <a href="/testimonials">Reviews</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
-          </li>
+          {navData.map((entry) => (
+            <li>
+              <a href={getLocalePath(entry.url)}>{t(entry.key)}</a>
+            </li>
+          ))}
         </ul>
         <ul>
           <li>
-            <h2>Services</h2>
+            <h2>{t("footer.services")}</h2>
           </li>
           <li>Service1</li>
           <li>Service2</li>
@@ -59,7 +48,7 @@ const currentYear = getCurrentYear()
         </ul>
         <ul>
           <li>
-            <h2>Contact</h2>
+            <h2>{t("footer.contact")}</h2>
           </li>
           <li>
             <a href="/contact">
@@ -77,7 +66,7 @@ const currentYear = getCurrentYear()
             </a>
           </li>
           <li>
-            <a href={`mailto:${client.email}`}>Click to Email</a>
+            <a href={`mailto:${client.email}`}>{t("footer.click")}</a>
           </li>
         </ul>
       </div>
@@ -86,13 +75,11 @@ const currentYear = getCurrentYear()
 
   <section class="credit">
     <div>
-      <span>Designed and Hand Coded by</span>
+      <span>{t("footer.credit")}</span>
       <a href="/" target="_blank" rel="noopener">Your Company Name</a>
-      <span class="copyright"> Copyright {currentYear} - Present</span>
+      <span class="copyright"> Copyright {currentYear}</span>
     </div>
     <div class="settings">
-      <DarkModeToggle />
-      <LanguagePicker />
     </div>
   </section>
 </footer>

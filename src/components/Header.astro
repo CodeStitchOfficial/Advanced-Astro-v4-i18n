@@ -3,6 +3,7 @@ import navData from "@data/navData"
 import { Icon } from 'astro-icon/components';
 import { getLocalePath, t } from "i18n:astro";
 import LocaleSwitcher from "./LocaleSwitcher.astro";
+import DarkModeToggle from "./DarkModeToggle.astro";
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
@@ -87,9 +88,11 @@ import LocaleSwitcher from "./LocaleSwitcher.astro";
             </li>
           ))}
         </ul>
+        <LocaleSwitcher />
       </div>
     </nav>
-    <a href="/contact" class="cs-button-solid cs-nav-button">Contact Us</a>
+    <!-- <a href="/contact" class="cs-button-solid cs-nav-button">{t("contact")}</a> -->
+    <DarkModeToggle />
     <LocaleSwitcher />
     
   </div>
@@ -154,6 +157,8 @@ import LocaleSwitcher from "./LocaleSwitcher.astro";
         opacity: 1;
         transform: translateX(0);
       }
+
+
     }
 
     .cs-container {
@@ -197,6 +202,11 @@ import LocaleSwitcher from "./LocaleSwitcher.astro";
       display: flex;
       justify-content: center;
       align-items: center;
+      &.cs-active {
+        .select-wrapper {
+        display: flex;
+      }
+      }
     }
 
     .cs-active {

@@ -384,6 +384,53 @@ It is important to note that this template does not support `"prefixDefaultLocal
  
 Internationalization is powered by [I18n for Astro integration](https://astro-i18n.netlify.app/). This project is set up to work with two languages out of the box, English (default language) and French. 
 
+the pages directory works as usual, it's useful when you want some urls to be
+unique, ie. not translated like API routes (eg. under pages/api)
+in 1 locale only (eg. /pages/fr/test won't be handled in a special way)
+
+The routes directory is a special one, that the integration uses to do some magic about routing (really useful with https://astro-i18n.netlify.app/usage/configuration/#pages) 
+The t function can be used in both routes and pages, it uses the url to know what language to load
+
+
+Accessing data from a name space.
+
+
+Data sample
+`home.json`
+```json
+"layout": {
+        "title": "Pixel Perfect Websites",
+        "description": "Meta description for the page"
+    },
+```
+Use `{t("home:layout.title")}` to access the `title` key from the `layout` object in the `home` name space (=`.json` file)
+
+
+Data sample:
+`home.json`
+```json
+    "services": [
+        {
+            "heading": "Service 1",
+            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+        },
+        {
+            "heading": "Service 2",
+            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+        },
+        {
+            "heading": "Service 3",
+            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+        }
+    ],
+```
+
+To access data nested in arrays with the `t` function, you can use this syntax: `<h2>{t("home:services.0.heading")}</h2>`, where 
+* `home:` is the name of the json namespace file
+* `0` here is the `[0]` index of the array.
+* `.heading` is tkey object key to access
+
+
 <a name="astroContentCollections"></a>
 
 ### Astro content collections

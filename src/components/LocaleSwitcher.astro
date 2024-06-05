@@ -1,16 +1,105 @@
 ---
 import { getLocale, getSwitcherData } from "i18n:astro";
-
+import { Icon } from "astro-icon/components";
+import { t } from "i18n:astro";
 const locale = getLocale();
 const data = getSwitcherData();
----
 
-<select class="border border-gray-300 rounded-md" onchange="location = this.value;">
-  {
-    data.map((e) => (
-      <option value={e.href} selected={e.locale === locale} class="bg-white hover:bg-gray-100">
-        {e.locale}
-      </option>
-    ))
-  }
-</select>
+
+---
+<div class="select-wrapper">
+	<label>
+		<Icon name="mdi--language" class="icon label-icon" />
+		<span class="sr-only">{t("language-label")}</span>
+
+		<select onchange="location = this.value;">
+			{
+			data.map((e) => (
+				<option value={e.href} selected={e.locale === locale} >
+				{t(`switcher.${e.locale}`)}
+				</option>
+			))
+			}
+		</select>
+		<Icon name="mdi--caret" class="icon caret"/>
+	</label>
+</div>
+
+<style lang="less">
+	.select-wrapper {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+    }
+
+  	label {
+		--sl-label-icon-size: 0.875rem;
+		--sl-caret-size: 1.25rem;
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		color: var(--bodyTextColorWhite);
+		position: relative;
+		&:hover {
+			&:before {
+			width: 100%;
+			}
+		}
+
+		&:before {
+			/* active state underline */
+			content: "";
+			width: 0%;
+			height: 2px;
+			background: var(--primary);
+			opacity: 1;
+			display: block;
+			position: absolute;
+			bottom: (0/16rem);
+			left: 0;
+			transition: width 0.3s;
+		}
+	}
+
+	.icon {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		pointer-events: none;
+	}
+
+	.label-icon {
+		font-size: var(--sl-label-icon-size);
+		inset-inline-start: 0;
+	}
+
+	.caret {
+		font-size: var(--sl-caret-size);
+		inset-inline-end: 0;
+	}
+
+	select {
+		font-size: clamp(0.875rem,1vw,1rem);
+		border: 0;
+		padding-block: 0.625rem;
+		padding-inline: calc(var(--sl-label-icon-size) + 0.25rem) calc(var(--sl-caret-size) + 0.25rem);
+		background-color: transparent;
+		text-overflow: ellipsis;
+		color: inherit;
+		cursor: pointer;
+		appearance: none;
+	}
+
+	option {
+		background-color: var(--secondary);
+		color: var(--bodyTextColorWhite);
+		padding: 1rem;
+	}
+
+	@media (max-width:  63.9375rem) {
+		// .select-wrapper {
+		// 	display: none;
+		// }
+	}
+</style>

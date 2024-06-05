@@ -1,26 +1,40 @@
 {
 	"home": "Accueil",
-	"about": "A propos",
+	"about": "À propos",
     "projects": "Portfolio",
     "project-1": "Projet 1",
     "project-2": "Projet 2",
-	"cta": "Contactez-nous",
+	"contact": "Contact",
+    "theme-label": "Select theme",
+    "language-label": "Select language",
+    "switcher": {
+        "en": "Anglais",
+        "fr": "Français"
+    },
     "quote": "Obtenir devis gratuit",
     "estimate": "Obtenir un devis",
     "ctaComponent": {
         "title1": "Confiez votre projet",
-        "title2": "A nos experts",
+        "title2": "à nos experts",
         "message": "Dites quelque chose d'accrocheur, d'informatif et d'encourageant à cliquer sur le bouton pour aller à la page de contact. J'aime ajouter cette bannière en bas de chaque page.",
         "cta":"Obtenir un devis"
     },
     "about-page": {
-        "landing": "A propos",
-        "topper": "A propos",
-        "title": "A propos de Nom de la Compagnie",
+        "landing": "À propos",
+        "topper": "À propos",
+        "title": "À propos de Nom de la Compagnie",
         "p-1": "Notre compagnie a été fondée In consequat tincidunt turpis sit amet imperdiet. Praesent Class officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent nonatourean olei aptent taciti sociosqu ad litora torquent per.",
         "p-2": "Nous croyons que In consequat tincidunt turpis sit amet imperdiet. Praesent Class officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent nonatourean olei aptent taciti sociosqu ad litora torquent per.",
         "p-3": "Il est vital de In consequat tincidunt turpis sit amet imperdiet.",
         "rank": "PDG",
         "cta": "Notre portfolio"    
+    },
+    "footer": {
+        "information": "informations",
+        "services": "Services",
+        "contact": "Contact",
+        "click": "Nous envoyer un email",
+        "p": "Contenu supplémentaire si vous en avez besoin, sinon vous pouvez supprimer tout ce tag <p>. C'est ce que je fais habituellement.",
+        "credit": "Conçu et codé maison par "
     }
 }

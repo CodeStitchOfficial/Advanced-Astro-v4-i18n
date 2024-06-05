@@ -22,6 +22,11 @@ const navData = [
           url: "/projects/project-2/"
         }
       ]
-    }
+    },
+    {
+      key: "contact",
+      url: "/contact/",
+      children: []
+    },
   ]
 export default navData

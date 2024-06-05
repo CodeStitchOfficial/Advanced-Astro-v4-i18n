@@ -4,7 +4,13 @@
     "projects": "Projects",
     "project-1": "Project 1",
     "project-2": "Project 2",
-	"cta": "Contact Us",
+	"contact": "Contact",
+    "theme-label": "Choisissez le thème",
+    "language-label": "Choisissez la langue",
+    "switcher": {
+        "en": "English",
+        "fr": "French"
+    },
     "quote": "Get Free Quote",
     "estimate": "Get an estimate now",
     "ctaComponent": {
@@ -22,6 +28,14 @@
         "p-3": "It's important In consequat tincidunt turpis sit amet imperdiet.",
         "rank": "CEO-Founder",
         "cta": "Our projects"    
+    },
+    "footer": {
+        "information": "Information",
+        "services": "Services",
+        "contact": "Contact",
+        "click": "Click to email",
+        "p": "Extra content if you need it, if not you can delete this whole p tag. I usually do.",
+        "credit": "Designed and Hand Coded by "
     }
     
 }
