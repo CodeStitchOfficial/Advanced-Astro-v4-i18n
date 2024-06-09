@@ -152,6 +152,7 @@ import Settings from "./Settings.astro";
 
       .cs-ul-wrapper {
         opacity: 1;
+        visibility: visible;
         transform: scaleX(1);
         transition-delay: 0.2s;
       }
@@ -278,6 +279,7 @@ import Settings from "./Settings.astro";
       background-color: #fff;
       box-shadow: inset rgba(0, 0, 0, 0.2) 0px 8px 24px;
       opacity: 0;
+      visibility: hidden;
       position: absolute;
       top: 100%;
       right: 0;
@@ -382,6 +384,7 @@ import Settings from "./Settings.astro";
         display: flex;
         align-items: center;
         margin-left: auto;
+        gap: 0.5em;
       }
     }
 
@@ -797,6 +800,7 @@ import Settings from "./Settings.astro";
       &.cs-dropdown-button {
         display: flex;
         align-items: center;
+        gap: 0.5em;
       }
     }
 
