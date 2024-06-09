@@ -1,0 +1,41 @@
+---
+// Adapted from Starlight's LanguageSelect - https://github.com/withastro/starlight/blob/15747325112c9fe43b8dfa4e986b95cf8e66af49/packages/starlight/components/LanguageSelect.astro
+import Select from './Select.astro';
+import { getLocale, getSwitcherData } from "i18n:astro";
+import { t } from "i18n:astro";
+const locale = getLocale();
+const data = getSwitcherData();
+---
+
+{
+    <starlight-lang-select>
+        <Select
+            icon="mdi--language"
+            label={locale}
+            value={locale}
+            options={data.map((option) => ({
+                value: option.href,
+                selected: option.locale === locale,
+                label: t(`languageSelect.${option.locale}`),
+            }))}
+            width="6em"
+        />
+    </starlight-lang-select>
+}
+
+<script>
+	class StarlightLanguageSelect extends HTMLElement {
+		constructor() {
+			super();
+			const select = this.querySelector('select');
+			if (select) {
+				select.addEventListener('change', (e) => {
+					if (e.currentTarget instanceof HTMLSelectElement) {
+						window.location.pathname = e.currentTarget.value;
+					}
+				});
+			}
+		}
+	}
+	customElements.define('starlight-lang-select', StarlightLanguageSelect);
+</script>
