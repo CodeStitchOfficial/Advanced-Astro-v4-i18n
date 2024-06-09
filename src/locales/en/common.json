@@ -7,9 +7,15 @@
 	"contact": "Contact",
     "theme-label": "Choisissez le thème",
     "language-label": "Choisissez la langue",
-    "switcher": {
+    "languageSelect": {
         "en": "English",
         "fr": "French"
+    },
+    "themeSelect": {
+        "accessibleLabel": "Select Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "auto": "Auto"
     },
     "quote": "Get Free Quote",
     "estimate": "Get an estimate now",

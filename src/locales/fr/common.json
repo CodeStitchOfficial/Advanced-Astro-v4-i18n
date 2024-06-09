@@ -7,9 +7,15 @@
 	"contact": "Contact",
     "theme-label": "Select theme",
     "language-label": "Select language",
-    "switcher": {
+    "languageSelect": {
         "en": "Anglais",
         "fr": "Français"
+    },
+    "themeSelect": {
+        "accessibleLabel": "Choisissez le thème",
+        "light": "Clair",
+        "dark": "Sombre",
+        "auto": "Auto"
     },
     "quote": "Obtenir devis gratuit",
     "estimate": "Obtenir un devis",
