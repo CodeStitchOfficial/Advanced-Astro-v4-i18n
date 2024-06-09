@@ -2,7 +2,7 @@
 // Adapted from Starlight's Select component - https://github.com/withastro/starlight/blob/15747325112c9fe43b8dfa4e986b95cf8e66af49/packages/starlight/components/Select.astro
 import { Icon } from 'astro-icon/components';
 ---
-<label style={`--sl-select-width: ${Astro.props.width}`}>
+<label style={`--select-width: ${Astro.props.width}`}>
 	<span class="sr-only">{Astro.props.label}</span>
 	<Icon name={Astro.props.icon} class="icon label-icon" />
 	<select value={Astro.props.value}>
@@ -15,10 +15,10 @@ import { Icon } from 'astro-icon/components';
 	<Icon name="mdi--caret" class="icon caret" />
 </label>
 
-<style>
+<style lang="less">
 	label {
-		--sl-label-icon-size: 0.875rem;
-		--sl-caret-size: 1.25rem;
+		--label-icon-size: 0.875rem;
+		--caret-size: 1.25rem;
 		position: relative;
 		display: flex;
 		align-items: center;
@@ -44,9 +44,8 @@ import { Icon } from 'astro-icon/components';
 			left: 0;
 			transition: width 0.3s;
 		}
-      }
+    }
 	
-
 	.icon {
 		position: absolute;
 		top: 50%;
@@ -57,22 +56,21 @@ import { Icon } from 'astro-icon/components';
 	}
 	
 	.label-icon {
-		font-size: var(--sl-label-icon-size);
+		font-size: var(--label-icon-size);
 		inset-inline-start: 0;
 	}
 	
 	.caret {
 		transform: rotate(180deg) translateY(50%);
 		transition: 0.3s;
-		/* font-size: var(--sl-caret-size); */
 		inset-inline-end: 0;
 	}
 
 	select {
-		font-size: clamp(0.875rem,1vw,1rem);
+		font-size: clamp(1rem,2.5vw,1.5rem);
 		border: 0;
 		padding-block: 0.625rem;
-		padding-inline: calc(var(--sl-label-icon-size) + 0.25rem) calc(var(--sl-caret-size) + 0.25rem);
+		padding-inline: calc(var(--label-icon-size) + 0.25rem) calc(var(--caret-size) + 0.25rem);
 		background-color: transparent;
 		text-overflow: ellipsis;
 		color: inherit;
@@ -81,35 +79,31 @@ import { Icon } from 'astro-icon/components';
 	}
 
 	option {
-		--color-bg-nav: #f6f7f9;
-    	--color-gray-1: #23262f;
-		background-color: var(--color-bg-nav);
-    	color: var(--color-gray-1);
+		background-color: var(--light);
+    	color: var(--grey);
 	}
 
-	@media (min-width: 50rem) {
+	@media only screen and (min-width: 64rem) {
 		select {
-			font-size: 0.875rem;
+			font-size: clamp(0.875rem,1vw,1rem);
+		}
+	}
+	
+	/* Dark Mode */
+  	body.dark-mode {
+		label {
+			color: var(--bodyTextColorWhite);
+			&:before {
+				background-color: var(--primaryLight);
+			}
+		}
+
+		option {
+			background-color: var(--grey);
+			color: var(--light);
+			padding: 1rem;
 		}
 	}
 
-	/* Dark Mode */
-  body.dark-mode {
-	label {
-		color: var(--bodyTextColorWhite)
-	}
-
-	label {
-		&:before {
-          background-color: var(--primaryLight);
-        }
-	}
-
-	option {
-		background-color:  hsl(224, 14%, 16%);
-    	color: hsl(224, 20%, 94%);
-		padding: 1rem;
-	}
-  }
-
 </style>
+
