@@ -2,8 +2,7 @@
 import navData from "@data/navData"
 import { Icon } from 'astro-icon/components';
 import { getLocalePath, t } from "i18n:astro";
-import LocaleSwitcher from "./LocaleSwitcher.astro";
-import DarkModeToggle from "./DarkModeToggle.astro";
+import Settings from "./Settings.astro";
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
@@ -88,12 +87,16 @@ import DarkModeToggle from "./DarkModeToggle.astro";
             </li>
           ))}
         </ul>
-        <LocaleSwitcher />
+        <!-- shown on mobile menu by default  -->
+        <div class="cs-shown cs-settings">
+          <Settings />
+        </div>
       </div>
     </nav>
-    <!-- <a href="/contact" class="cs-button-solid cs-nav-button">{t("contact")}</a> -->
-    <DarkModeToggle />
-    <LocaleSwitcher />
+    <!-- shown on desktop menu by default  -->
+    <div class="cs-hidden cs-settings">
+      <Settings />
+    </div>
     
   </div>
 </header>
@@ -284,15 +287,20 @@ import DarkModeToggle from "./DarkModeToggle.astro";
       transform: scaleX(0);
       transition: transform 0.4s, opacity 0.3s;
       transform-origin: top right;
+      padding: (48/16rem) clamp(1.75rem, 3vw, 2.5rem) (32/16rem) (70/16rem);
+      display: grid;
+      gap: clamp(1.25rem, 2.6vw, 2.25rem);
+
+
     }
 
     .cs-ul {
       width: auto;
       min-width: 40%;
-      height: 65vh;
+      // height: 65vh;
       margin: 0;
       /* 28px - 40px */
-      padding: (48/16rem) clamp(1.75rem, 3vw, 2.5rem) (32/16rem) (70/16rem);
+      // padding: (48/16rem) clamp(1.75rem, 3vw, 2.5rem) (32/16rem) (70/16rem);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -368,11 +376,20 @@ import DarkModeToggle from "./DarkModeToggle.astro";
           display: block;
         }
       }
+
+      /* styles these li items that are also dropdown buttons */
+      &.cs-dropdown-button {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+      }
     }
 
     .cs-button-solid {
       display: none;
     }
+
+    
   }
 }
 
@@ -530,7 +547,6 @@ import DarkModeToggle from "./DarkModeToggle.astro";
       color: inherit;
       transform: rotate(180deg);
       transition: 0.3s;
-      
     }
 
     .cs-drop-ul {
@@ -728,6 +744,12 @@ import DarkModeToggle from "./DarkModeToggle.astro";
       align-items: center;
       /* 20px - 36px */
       gap: clamp(1.25rem, 2.6vw, 2.25rem);
+      /* separator between cs-ul and darkmode toggle */
+      &::after {
+        content: "";
+        height: 2rem;
+        border-inline-end: 1px solid hsl(224, 6%, 77%);
+      }
     }
 
     .cs-li {
@@ -771,6 +793,23 @@ import DarkModeToggle from "./DarkModeToggle.astro";
         left: 0;
         transition: width 0.3s;
       }
+
+      &.cs-dropdown-button {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .cs-settings {
+      gap: 0.5rem;
+    }
+
+    .cs-settings.cs-hidden {
+      display: flex;
+    }
+
+    .cs-settings.cs-shown {
+      display: none;
     }
   }
 }
@@ -785,6 +824,13 @@ import DarkModeToggle from "./DarkModeToggle.astro";
         /* makes it turn white */
         filter: grayscale(1) brightness(1000%);
       }
+
+      .cs-ul {
+      /* separator between cs-ul and darkmode toggle */
+      &::after {
+        border-inline-end: 1px solid hsl(224, 10%, 23%);
+      }
+    }
 
       .cs-li-link {
         color: var(--bodyTextColorWhite);
