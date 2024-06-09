@@ -1,56 +1,32 @@
-const navData = {
-  en: [
+const navData = [
     {
-      key: "Home",
+      key: "home",
       url: "/",
       children: []
     },
     {
-      key: "About Us",
+      key: "about",
       url: "/about/",
       children: []
     },
     {
-      key: "Projects",
+      key: "projects",
       url: "/projects/",
       children: [
         {
-          key: "Project 1",
+          key: "project-1",
           url: "/projects/project-1/"
         },
         {
-          key: "Project 2",
+          key: "project-2",
           url: "/projects/project-2/"
         }
       ]
-    }
-  ],
-  fr: [
-    {
-      key: "Accueil",
-      url: "/",
-      children: []
     },
     {
-      key: "À propos",
-      url: "/about/",
+      key: "contact",
+      url: "/contact/",
       children: []
     },
-    {
-      key: "Portfolio",
-      url: "/projects/",
-      children: [
-        {
-          key: "Projet 1",
-          url: "/projects/project-1/"
-        },
-        {
-          key: "Projet 2",
-          url: "/projects/project-2/"
-        }
-      ]
-    }
   ]
-}
-
 export default navData

@@ -375,14 +375,62 @@ This kit demonstrates the use of the built-in `<Picture />` component, [for whic
 
 ### i18n
 
-In `astro.config.mjs/`, you'll find a `i18n` object which contains the configuration for the blog. This project is set up to work with two languages out of the box. English is the default language, and French is the secondary language. You are welcome to make changes using
+<!-- In `astro.config.mjs/`, you'll find a `i18n` object which contains the configuration for the blog. This project is set up to work with two languages out of the box. English is the default language, and French is the secondary language. You are welcome to make changes using
 <a href="https://docs.astro.build/en/guides/internationalization/#_top">Astro i18n</a> documentation.
 
 Organize your content folders with localized content by language. Create individual `/[locale]/` folders anywhere within `src/pages/` and Astro’s file-based routing will create your pages at corresponding URL paths. Pages for your default language (here, `"en"`) stay at the root of `src/pages/`. Your folder names must match the items in locales exactly.
 
 Modify `src/i18n/defaultLanguageOptions` with the correct locales and labels to update the LanguageSelect component.
 
-It is important to note that this template does not support `"prefixDefaultLocale: true"`. 
+It is important to note that this template does not support `"prefixDefaultLocale: true"`.  -->
+ 
+Internationalization is powered by [I18n for Astro integration](https://astro-i18n.netlify.app/). This project is set up to work with two languages out of the box, English (default language) and French. 
+
+the pages directory works as usual, it's useful when you want some urls to be
+unique, ie. not translated like API routes (eg. under pages/api)
+in 1 locale only (eg. /pages/fr/test won't be handled in a special way)
+
+The routes directory is a special one, that the integration uses to do some magic about routing (really useful with https://astro-i18n.netlify.app/usage/configuration/#pages) 
+The t function can be used in both routes and pages, it uses the url to know what language to load
+
+
+Accessing data from a name space.
+
+
+Data sample
+`home.json`
+```json
+"layout": {
+        "title": "Pixel Perfect Websites",
+        "description": "Meta description for the page"
+    },
+```
+Use `{t("home:layout.title")}` to access the `title` key from the `layout` object in the `home` name space (=`.json` file)
+
+
+Data sample:
+`home.json`
+```json
+    "services": [
+        {
+            "heading": "Service 1",
+            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+        },
+        {
+            "heading": "Service 2",
+            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+        },
+        {
+            "heading": "Service 3",
+            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+        }
+    ],
+```
+
+To access data nested in arrays with the `t` function, you can use this syntax: `<h2>{t("home:services.0.heading")}</h2>`, where 
+* `home:` is the name of the json namespace file
+* `0` here is the `[0]` index of the array.
+* `.heading` is tkey object key to access
 
 
 <a name="astroContentCollections"></a>

@@ -2,10 +2,12 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
 import Landing from "@components/Landing.astro";
+import { t } from "i18n:astro";
+
 ---
 
 <BaseLayout
-  title="About"
+  title={t("about-page.landing")}
   description="Meta description for the page"
 >
   <!-- ============================================ -->
@@ -13,7 +15,7 @@ import Landing from "@components/Landing.astro";
   <!-- ============================================ -->
 
   <Landing 
-    title="About Us"
+    title={t("about-page.landing")}
   />
 
   <!-- ============================================ -->
@@ -65,27 +67,20 @@ import Landing from "@components/Landing.astro";
       </div>
       <!-- Right Content Section-->
       <div class="cs-right">
-        <span class="cs-topper">About Us</span>
-        <h2 class="cs-title">About Company Title</h2>
+        <span class="cs-topper">{t("about-page.topper")}</span>
+        <h2 class="cs-title">{t("about-page.title")}</h2>
         <p class="cs-text">
-          In consequat tincidunt turpis sit amet imperdiet. Praesent Class
-          officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur
-          et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent
-          nonatourean olei aptent taciti sociosqu ad litora torquent per.
+          {t("about-page.p-1")}
         </p>
         <p class="cs-text">
-          In consequat tincidunt turpis sit amet imperdiet. Praesent Class
-          officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur
-          et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent
-          nonatourean olei aptent taciti sociosqu ad litora torquent per.
+          {t("about-page.p-2")}
         </p>
         <div class="cs-flex-group">
           <p class="cs-flex-p">
-            In consequat tincidunt turpis sit amet imperdiet. Praesent Classei
-            consequat tincidunt turpis sit amet imperdiet for mind.
+            {t("about-page.p-3")}
           </p>
           <span class="cs-name">Justin Time</span>
-          <span class="cs-job">CEO-Founder</span>
+          <span class="cs-job">{t("about-page.rank")}</span>
           <img
             class="cs-quote-icon"
             loading="lazy"
@@ -96,7 +91,7 @@ import Landing from "@components/Landing.astro";
             height="77"
           />
         </div>
-        <a href="/projects" class="cs-button-solid">Our Projects</a>
+        <a href="/projects" class="cs-button-solid">{t("about-page.cta")}</a>
       </div>
     </div>
   </section>

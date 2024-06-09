@@ -3,17 +3,19 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "concurrently \"decap-server\" \"astro dev\"",
+    "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrolicious/i18n": "^0.4.2",
     "astro": "^4.9.1",
     "astro-icon": "^1.1.0",
     "autoprefixer": "^10.4.19",
     "decap-server": "^3.0.4",
+    "i18next": "^23.11.5",
     "less": "^4.2.0"
   },
   "devDependencies": {
