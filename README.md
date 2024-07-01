@@ -375,26 +375,67 @@ This kit demonstrates the use of the built-in `<Picture />` component, [for whic
 
 ### i18n
 
-<!-- In `astro.config.mjs/`, you'll find a `i18n` object which contains the configuration for the blog. This project is set up to work with two languages out of the box. English is the default language, and French is the secondary language. You are welcome to make changes using
-<a href="https://docs.astro.build/en/guides/internationalization/#_top">Astro i18n</a> documentation.
-
-Organize your content folders with localized content by language. Create individual `/[locale]/` folders anywhere within `src/pages/` and Astro’s file-based routing will create your pages at corresponding URL paths. Pages for your default language (here, `"en"`) stay at the root of `src/pages/`. Your folder names must match the items in locales exactly.
-
-Modify `src/i18n/defaultLanguageOptions` with the correct locales and labels to update the LanguageSelect component.
-
-It is important to note that this template does not support `"prefixDefaultLocale: true"`.  -->
  
-Internationalization is powered by [I18n for Astro integration](https://astro-i18n.netlify.app/). This project is set up to work with two languages out of the box, English (default language) and French. 
+Internationalization is powered by the [I18n for Astro integration plugin](https://astro-i18n.netlify.app/). This project is set up to work with two languages out of the box, English (default language) and French. 
 
-the pages directory works as usual, it's useful when you want some urls to be
-unique, ie. not translated like API routes (eg. under pages/api)
+This plugin brings 4 major changes to our project structure:
+
+1. in `astro.config.js`
+
+```JS
+i18n({
+    defaultLocale: "en",
+    locales: ["fr", "en"],
+    client: {
+      data: true,
+    },
+  })
+```
+
+This allows to configure the integration. This minimal set up here configures the languages in your project. You can check the [configuration documentation](https://astro-i18n.netlify.app/usage/configuration/#_top) for more options to pass to this configuration object.
+
+2. The `routes` directory
+
+Unlike a monolingual Astro project, the `routes` directory is where most of your `.astro` pages will live and what the integration uses to create routing. Any `.astro` file placed in this `routes` directory will be accessible from all locales. For example, `index.astro` will be accessible at `/blog` and `/fr/blog` by default.
+
+![alt text](/public/assets/images/docs/image.png)
+
+The `pages` directory can still be used. It's useful when you want some urls to be unique, ie. not translated like API routes (eg. under pages/api)
 in 1 locale only (eg. /pages/fr/test won't be handled in a special way)
 
-The routes directory is a special one, that the integration uses to do some magic about routing (really useful with https://astro-i18n.netlify.app/usage/configuration/#pages) 
-The t function can be used in both routes and pages, it uses the url to know what language to load
+3. The `locales` directory
+The `locales` directory will have one sub-directory for each locale in your project. This is where the translations live, in `.json` files. You are free to organize your translations as you with, but you must provide at least a `src/locales/en/common.json` for each locale. These json files are also referred to as namespaces.
+
+These json files must have the same name and the same organisation of key/values pairs. The only difference will obviously be the translated content.
+
+For example:
+`/locales/en/common.json`
+{
+  "home": "Home",
+	"about": "About",
+  "projects": "Projects",
+  "project-1": "Project 1",
+  "project-2": "Project 2",
+}
+
+`/locales/fr/common.json`
+{
+  "home": "Accueil",
+	"about": "A propos",
+  "projects": "Projets",
+  "project-1": "Projet 1",
+  "project-2": "Projet 2",
+}
 
 
-Accessing data from a name space.
+4. Accessing the namespaces' data and translating with the `t()` function
+Under the hood, [i18next](https://www.i18next.com/) is used to manage translations. We enforce the following conventions:
+
+* Locales must live in the src/locales/ directory (can be customized with localesDir)
+* A folder for the default locale is required, eg. `src/locales/en/`
+* Provide at least a `src/locales/en/common.json` file (can be customized with defaultNamespace)
+
+To access data from a name space in an .`astro` file, we use the `t` function (don't forget to import it first `import { t } from "i18n:astro";`).
 
 
 Data sample
@@ -432,6 +473,7 @@ To access data nested in arrays with the `t` function, you can use this syntax: 
 * `0` here is the `[0]` index of the array.
 * `.heading` is tkey object key to access
 
+The t function is re-exported from i18next and benefits from type-safety automatically. Have a look at i18next docs to learn more.
 
 <a name="astroContentCollections"></a>
 
