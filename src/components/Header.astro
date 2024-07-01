@@ -2,7 +2,7 @@
 import navData from "@data/navData"
 import { Icon } from 'astro-icon/components';
 import { getLocalePath, t } from "i18n:astro";
-import Settings from "./Settings.astro";
+import Settings from "./TemplateComponents/Settings.astro"
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
@@ -33,7 +33,8 @@ import Settings from "./Settings.astro";
       <!-- This also allows for easy substitution of CodeStitch navigations. Just replace the .cs-ul-wrapper in the new navigation with this one -->
       <div class="cs-ul-wrapper">
         <ul id="cs-expanded-ul" class="cs-ul">
-          {navData.map((entry) => (
+          <!-- Note: the `:any` type on the entry is used solely to stop TypeScript from throwing warnings -->
+          {navData.map((entry: any) => (
             <li
               class:list={[
                 "cs-li",
@@ -161,8 +162,6 @@ import Settings from "./Settings.astro";
         opacity: 1;
         transform: translateX(0);
       }
-
-
     }
 
     .cs-container {

@@ -90,7 +90,7 @@ const currentYear = getCurrentYear()
   #footer {
     font-size: ~"min(4vw, 1.2em)";
     padding: (84/16rem) 0 (20/16rem);
-    background: var(--secondary);
+    background: var(--dark);
 
     .left-section {
       text-align: center;
@@ -223,7 +223,7 @@ const currentYear = getCurrentYear()
       a {
         font-size: (16/16rem);
         text-decoration: none;
-        color: var(--primary);
+        color: var(--primaryLight);
 
         &:hover {
           text-decoration: underline;
@@ -340,7 +340,9 @@ const currentYear = getCurrentYear()
 @media only screen and (min-width: 0em) {
   body.dark-mode {
     #footer {
-      background: var(--secondaryLight);
+      .credit a{
+        color: var(--primaryDark);
+      }
     }
   }
 }

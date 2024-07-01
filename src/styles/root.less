@@ -6,20 +6,20 @@
 
 /* CodeStitch Root and Helpers */
 @media only screen and (min-width: 0em) {
-  // Website colors
   :root {
-    --primary: hsl(80, 90%, 55%);
-    --primaryLight: hsl(80, 60%, 40%);
-    --secondary: #1c1c1c;
-    --secondaryLight: #061623;
+    --primary: #c00065;
+    --primaryLight: #8c5363;
+    --secondary: #302321;
+    --secondaryLight: #423432;
     --headerColor: #1a1a1a;
     --bodyTextColor: #4e4b66;
     --bodyTextColorWhite: #fafbfc;
 
     /* dark mode colors */
-    --dark: hsl(163, 96%, 5%);
-    --medium: hsl(163, 95%, 8%);
-    --accent: #334756;
+    --primaryDark: #fab0c6;
+    --dark: #1d1715;
+    --medium: #1d1715;
+    --accent: #460b05;
     --grey: hsl(224, 14%, 16%);
     --light: hsl(230, 20%, 94%);
 
@@ -74,7 +74,7 @@
     padding: 0 (30/16rem);
 
     // Transition Properties
-    color: #000;
+    color: var(--light);
     background-color: var(--primary);
     display: inline-block;
     position: relative;
@@ -125,7 +125,7 @@
     }
 
     .cs-topper {
-      color: var(--primaryLight);
+      color: var(--primaryDark);
     }
 
     .cs-reviewer {
