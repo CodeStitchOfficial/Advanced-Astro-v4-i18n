@@ -33,7 +33,7 @@ import Settings from "./TemplateComponents/Settings.astro"
       <!-- This also allows for easy substitution of CodeStitch navigations. Just replace the .cs-ul-wrapper in the new navigation with this one -->
       <div class="cs-ul-wrapper">
         <ul id="cs-expanded-ul" class="cs-ul">
-          <!-- Note: the `:any` type on the entry is used solely to stop TypeScript from throwing warnings -->
+          <!-- Note: `:any` is solely used to stop the TypeScript warnings. It's an upstream issue with the i18n package which does not impact the code. -->
           {navData.map((entry: any) => (
             <li
               class:list={[
