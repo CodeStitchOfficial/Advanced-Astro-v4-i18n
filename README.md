@@ -12,7 +12,6 @@ Test sync
 ## Table of Contents
 
 - [Overview](#overview)
-- [Acknowledgments](#acknowledgments)
 - [Prerequisites](#prerequisites)
 - [Features](#features)
 - [File Structure](#fileStructure)
@@ -23,10 +22,11 @@ Test sync
   - [Reusing Code](#reusingCode)
   - [Adding More Pages](#addingMorePages)
   - [i18n](#i18n)
-  - [Navigation via Front Matter](#navigationViaFrontMatter)
+  - [Navigation via NavData.json](#navigationViaNavData)
   - [Built-in Astro components](#builtinastrocomponents)
   - [Astro Content Collections](#AstroContentCollections)
 - [Deployment](#deployment)
+- [Acknowledgments](#acknowledgments)
 - [Conclusion](#conclusion)
 
 <a name="overview"></a>
@@ -57,7 +57,7 @@ Only the vanilla web technologies are _required_ before using this kit, with som
 ## Features
 
 * Runs on Astro v4
-* Decap CMS integration with a blog ready to go. Give access to your client via Netlify Identity to allow them to write blog posts. Their edits will be pushed to the repository, triggering a re-build automatically.
+* i18n setup ready to go
 * Astro's `<ViewTransitions />` integration
 * Components, props and scoped styles, as demonstrated in `/src/components/Landing.astro` for example
 * Astro's built-in components such as `<Picture />`, as demonstrated in `/src/components/Landing.astro` for example
@@ -66,13 +66,13 @@ Only the vanilla web technologies are _required_ before using this kit, with som
 * [CodeStitch](https://codestitch.app/) HTML and CSS blocks to build the UI.
 * Perfect Lighthouse scores
   
-![Lighthouse perfect score](https://github.com/BuckyBuck135/Intermediate-Astro-v4-Decap-CMS/blob/main/public/assets/lighthouse/100-score.png)
 
 This kit ships the following packages:
 * [Astro Icon](https://www.astroicon.dev/) - Astro Icon is a straightforward icon system for the Astro framework.
 * [Autoprefixer](https://www.npmjs.com/package/autoprefixer) - PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from Can I Use. It is recommended by Google and used in Twitter and Alibaba.
 * [LESS](https://www.npmjs.com/package/less) - Less makes a few convenient additions to the CSS language, but you can also simply write standard CSS if you wish.
-* [Concurrently](https://www.npmjs.com/package/concurrently) - Used to run npm commands concurrently. In our case, we use it to spin up the local dev environment on localhost:4321 and Decap local server on localhost:8081
+* [Astrolicious i18n](https://github.com/astrolicious/i18n) -  i18n integration for Astro with server and client utilities, type safety and translations built-in.
+
 <a name="fileStructure"></a>
 
 ## File Structure
@@ -91,28 +91,24 @@ This kit ships the following packages:
 |   └── sitemap.html
 ├── src/
 |   ├── assets/
-|   |   |—— images/
-|   |   |   ── blog/
+|   |   └── images/
 |   ├── components/
+│   │   └── TemplateComponents /* contains all non-UI related components */
 │   ├── data/
-│   │   ├── client.json
-│   │   └── navData.json
-│   ├── i18n/
-│   │   ├── defaultLangOptions.ts
-│   │   └── localizedUrl.ts
-│   ├── icons/
+│   │   ├── client.json /* modify your client's information here */
+│   │   └── navData.json /* modify your navigation data here */
+│   ├── icons/ /* place SVGS for the <Icon /> component here */
 |   ├── libs/
-|   |   └── utils.js
+|   |   |── global.d.ts /* used by the ThemeProvider component */
+|   |   └── utils.js /* place any utility functions here */
+│   ├── locales/ /* place your json files for translations in these sub-folders */
+│   │   ├── en 
+│   │   └── fr
 │   ├── layouts/
 │   │   └── BaseLayout.astro
-│   ├── pages/
-|   |   └── fr/
-│   │   │   |—— index.astro
-│   │   │   |—— about.astro
-│   │   │   |—— contact.astro
-│   │   │   └── projects/
-|   |   |── index.astro
-|   |   |—— about.astro
+│   ├── routes/ /* Managed by the i18n package; palce your "pages" here */
+|   |   |── index.astro /* Accessible at / and /fr by default */
+|   |   |—— about.astro /* Accessible at /about and /fr/about by default etc. */
 |   |   |—— contact.astro
 │   │   └── projects/
 |   └── styles/
@@ -237,7 +233,7 @@ rendering your pages.
 
 To add sub-pages, you will first need to create a new folder under `src/pages/` and populate it with `.astro` pages. Look at the `src/pages/projects` forlder for an example. Don't forget to edit `navData.json` to handle the navigation. The navigation bar is already set up to create drop-down menus.
 
-<a name="navigationViaFrontMatter"></a>
+<a name="navigationViaNavData"></a>
 
 ### Navigation via navData.json
 
@@ -251,65 +247,62 @@ This will allow you to continue to reap the benefits of navigation vi navData.js
 > Note: we have customised this navigation wrapper to include better accessibility features, which you will not find in navigation stitches.
 
 ``` JSX
-<div class="cs-ul-wrapper">
-  <ul id="cs-expanded-ul" class="cs-ul">
-    {navData.map((entry) => (
-      <li
-        class:list={[
-          "cs-li",
-          { "cs-dropdown": entry.children?.length > 0 },
-        ]}
-        
-      >
-        {entry.children?.length > 0 ? (
-          // If entry has children in navData.json, create a button and a dropdown icon
-          <button
-          aria-expanded="false"
-          aria-controls={`submenu-${entry.key}`}
-          aria-label="dropdown-label"
-            class:list={[
-              "cs-li-link cs-dropdown-button",
-              { "cs-active": Astro.url.pathname.includes(entry.url)},
-            ]}
-          >
-            {entry.key}
-            <Icon name="mdi--caret" class="cs-drop-icon" />
-          </button>
-        ) : (
-          // If entry does not have children in navData.json, create an anchor
-          <a
-            href={entry.url}
-            class:list={[
-              "cs-li-link",
-              { "cs-active": Astro.url.pathname === entry.url },
-            ]}
-            aria-current={Astro.url.pathname === entry.url ? "page" : undefined}
-          >
-            {entry.key}
-          </a>
-        )}
-        
-        {entry.children?.length > 0 && (
-          // If entry has children in navData.json, create a drop down menu
-          <ul id={`submenu-${entry.key}`} class="cs-drop-ul">
-            {entry.children.map((child) => (
-              <li class="cs-drop-li">
-                <a 
-                  href={child.url} 
-                  class="cs-li-link cs-drop-link"
-                  aria-current={Astro.url.pathname === child.url ? "page" : undefined}
-                  aria-label={child.key}
+<ul id="cs-expanded-ul" class="cs-ul">
+          <!-- Note: the `:any` type on the entry is used solely to stop TypeScript from throwing warnings -->
+          {navData.map((entry: any) => (
+            <li
+              class:list={[
+                "cs-li",
+                { "cs-dropdown": entry.children?.length > 0 },
+              ]}
+              
+            >
+              {entry.children?.length > 0 ? (
+                // If entry has children in navData.json, create a button and a dropdown icon
+                <button
+                aria-expanded="false"
+                aria-controls={`submenu-${entry.key}`}
+                  class:list={[
+                    "cs-li-link cs-dropdown-button",
+                    { "cs-active": Astro.url.pathname.includes(entry.url)},
+                  ]}
                 >
-                  {child.key}
+                  {t(entry.key)}
+                  <Icon name="mdi--caret" class="cs-drop-icon" />
+                </button>
+              ) : (
+                // If entry does not have children in navData.json, create an anchor
+                <a
+                  href={getLocalePath(entry.url)}
+                  class:list={[
+                    "cs-li-link",
+                    { "cs-active": Astro.url.pathname === getLocalePath(entry.url) },
+                  ]}
+                  aria-current={Astro.url.pathname === getLocalePath(entry.url) ? "page" : undefined}
+                >
+                  {t(entry.key)}
                 </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-    ))}
-  </ul>
-</div>
+              )}
+              
+              {entry.children?.length > 0 && (
+                // If entry has children in navData.json, create a drop down menu
+                <ul id={`submenu-${entry.key}`} class="cs-drop-ul">
+                  {entry.children.map((child) => (
+                    <li class="cs-drop-li">
+                      <a 
+                        href={getLocalePath(child.url)}
+                        class="cs-li-link cs-drop-link"
+                        aria-current={Astro.url.pathname === getLocalePath(child.url) ? "page" : undefined}
+                      >
+                        {t(child.key)}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
 ```
 
 > Should you wish to use your own method of rendering the navigation, you can still take advantage of applying the "active" class styles by using a smaller amount of code within the class attribute of the link:
@@ -410,62 +403,66 @@ These json files must have the same name and the same organisation of key/values
 
 For example:
 `/locales/en/common.json`
+```
 {
   "home": "Home",
-	"about": "About",
+  "about": "About",
   "projects": "Projects",
   "project-1": "Project 1",
   "project-2": "Project 2",
 }
+```
 
 `/locales/fr/common.json`
+```
 {
   "home": "Accueil",
-	"about": "A propos",
+  "about": "A propos",
   "projects": "Projets",
   "project-1": "Projet 1",
   "project-2": "Projet 2",
 }
+```
 
+4. Accessing the namespaces' data and translating with the `t()` function.
 
-4. Accessing the namespaces' data and translating with the `t()` function
 Under the hood, [i18next](https://www.i18next.com/) is used to manage translations. We enforce the following conventions:
 
 * Locales must live in the src/locales/ directory (can be customized with localesDir)
 * A folder for the default locale is required, eg. `src/locales/en/`
 * Provide at least a `src/locales/en/common.json` file (can be customized with defaultNamespace)
 
-To access data from a name space in an .`astro` file, we use the `t` function (don't forget to import it first `import { t } from "i18n:astro";`).
+To access data from a name space in an .`astro` file, we use the `t` function. Don't forget to import it first in your astro file with  `import { t } from "i18n:astro";`.
 
 
-Data sample
+
 `home.json`
 ```json
 "layout": {
-        "title": "Pixel Perfect Websites",
-        "description": "Meta description for the page"
-    },
+    "title": "Pixel Perfect Websites",
+    "description": "Meta description for the page"
+},
 ```
-Use `{t("home:layout.title")}` to access the `title` key from the `layout` object in the `home` name space (=`.json` file)
+Use `{t("home:layout.title")}` to access the `title` key from the `layout` object in the `home` namespace (=.json file)
 
 
 Data sample:
 `home.json`
 ```json
-    "services": [
-        {
-            "heading": "Service 1",
-            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
-        },
-        {
-            "heading": "Service 2",
-            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
-        },
-        {
-            "heading": "Service 3",
-            "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
-        }
-    ],
+"services": [
+    {
+        "heading": "Service 1",
+        "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+    },
+    {
+        "heading": "Service 2",
+        "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+    },
+    {
+        "heading": "Service 3",
+        "p": "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences."
+    }
+],
 ```
 
 To access data nested in arrays with the `t` function, you can use this syntax: `<h2>{t("home:services.0.heading")}</h2>`, where 
@@ -493,7 +490,7 @@ Content Collections can also be used on content that is not created via the CMS.
 <a name="deployment"></a>
 
 ## Deployment
-
+0. Before you deploy, it is recommended to test the build. Run `npm run build` to build the project. Once done, run `npm run preview` which you can access on http://localhost:4321/. This allows you to test your website as if it was deployed on your host.
 1. Ensure the sitemap, robots.txt and \_redirects have been filled out. Instructions and tools for how to do so can be found in the File Structure section
 2. Navigate to your Netlify Admin Panel, click _Add new site | Import an existing project_
 3. Follow the instructions to connect your GitHub repository to Netlify.
@@ -511,7 +508,8 @@ Content Collections can also be used on content that is not created via the CMS.
 
 The author would like to acknowledge:
 * [Cedar Studios](https://github.com/cedar-studios) - Their [Intermediate-Astro-Kit-LESS](https://github.com/cedar-studios/Intermediate-Astro-Kit-LESS/tree/master) is the base of this template, which aims to improve on a few issues such as a breaking update to Astro v.4 due to outdated `astro-netlify-cms` integration.
-* [CodeStitch](https://codestitch.app/) - Some of their free stitches were used in this template.
+* [CodeStitch](https://codestitch.app/) - The UI was built with their stitches.
+* [Starlight](https://starlight.astro.build/) - The ThemeProvider and Select components are derived from Starlight
 
 
 
