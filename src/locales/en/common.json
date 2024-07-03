@@ -43,7 +43,5 @@
         "click": "Click to email",
         "p": "Extra content if you need it, if not you can delete this whole p tag. I usually do.",
         "credit": "Designed and Hand Coded by "
-    },
-    "readMore": "Read More"
-    
+    }    
 }

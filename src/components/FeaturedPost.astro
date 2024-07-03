@@ -1,9 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { getLocale, t } from "i18n:astro";
 import { Image } from "astro:assets";
-import { formatDate } from "@utils/utils.js";
+import { slugify, formatDate } from "@utils/utils.js";
+import { getLocale, t } from "i18n:astro";
 
+// Gets posts by locale AND by tag
 const locale = getLocale();
 const featuredPosts = await getCollection("blog", ({ id, data }) => {
   return id.startsWith(locale) && data.tags.includes("featured");
@@ -12,11 +13,11 @@ const featuredPosts = await getCollection("blog", ({ id, data }) => {
 
 <div class="blog-sidebar">
   <div class="blog-featured-group">
-    <span class="blog-header">Featured Posts</span>
-    {featuredPosts.length === 0 && <h2>No Featured Posts</h2>}
+    <span class="blog-header">{t("blog:featuredPosts")}</span>
+    {featuredPosts.length === 0 && <h2>{t("blog:noFeaturedPosts")}</h2>}
     {
       featuredPosts.map((post) => (
-        <a class="blog-feature" href={`/blog/${post.slug}`}>
+        <a class="blog-feature" href={slugify(post.slug)}>
           <picture class="blog-featureImage">
             <Image
               src={post.data.image}

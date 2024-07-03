@@ -1,8 +1,7 @@
 ---
 // Adapted from Starlight's LanguageSelect - https://github.com/withastro/starlight/blob/15747325112c9fe43b8dfa4e986b95cf8e66af49/packages/starlight/components/LanguageSelect.astro
 import Select from './Select.astro';
-import { getLocale, getSwitcherData } from "i18n:astro";
-import { t } from "i18n:astro";
+import { getLocale, getSwitcherData, t } from "i18n:astro";
 const locale = getLocale();
 const data = getSwitcherData();
 ---
