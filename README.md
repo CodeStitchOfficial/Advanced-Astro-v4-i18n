@@ -48,8 +48,6 @@ Only the vanilla web technologies are _required_ before using this kit, with som
 
 1. [Astro's Documentation](https://docs.astro.build/en/getting-started/)
 2. [Astro Crash Course in 20 Minutes!](https://www.youtube.com/watch?v=zrPVTf761OI)
-3. [Decap CMS' docs](https://decapcms.org/docs/intro/) can also be found should you wish to extend the CMS beyond what's in this kit
-
 
 
 <a name="features"></a>
@@ -98,7 +96,7 @@ This kit ships the following packages:
 │   │   ├── client.json /* modify your client's information here */
 │   │   └── navData.json /* modify your navigation data here */
 │   ├── icons/ /* place SVGS for the <Icon /> component here */
-|   ├── libs/
+|   ├── utils/
 |   |   |── global.d.ts /* used by the ThemeProvider component */
 |   |   └── utils.js /* place any utility functions here */
 │   ├── locales/ /* place your json files for translations in these sub-folders */
@@ -401,6 +399,8 @@ The `locales` directory will have one sub-directory for each locale in your proj
 
 These json files must have the same name and the same organisation of key/values pairs. The only difference will obviously be the translated content.
 
+The default (and mandatory) name space is `common.json`. In this kit, we also use extra name spaces so that `common.json` doesn't become too bloated. You can use `common.json` for translations of repeated components, and other name spaces for individual pages for example. 
+
 For example:
 `/locales/en/common.json`
 ```
@@ -434,7 +434,39 @@ Under the hood, [i18next](https://www.i18next.com/) is used to manage translatio
 
 To access data from a name space in an .`astro` file, we use the `t` function. Don't forget to import it first in your astro file with  `import { t } from "i18n:astro";`.
 
+1. First, we create the json data. 
 
+`src/locales/fr/common.json`
+```json
+"ctaComponent": {
+    "title1": "Confiez votre projet",
+    "title2": "à nos experts",
+    "message": "Dites quelque chose d'accrocheur, d'informatif et d'encourageant à cliquer sur le bouton pour aller à la page de contact. J'aime ajouter cette bannière en bas de chaque page.",
+    "cta":"Obtenir un devis"
+},
+```
+
+2. Then, in our `.astro` file, we import the `t` function and use it in JSX:
+
+`src/components/CTA.astro`
+```JSX
+---
+import { t } from "i18n:astro";
+---
+<div class="container">
+  <h2 class="title">
+    {t("ctaComponent.title1")}
+    <br />
+    {t("ctaComponent.title2")}
+  </h2>
+  <p>
+    {t("ctaComponent.message")}
+  </p>
+  <a href="/contact" class="cs-button-solid">{t("ctaComponent.cta")}</a>
+</div>
+```
+
+To access data from a name space other than `common.json`, the syntax will be slightly different: we must prefix with the name of the name space.
 
 `home.json`
 ```json
@@ -446,7 +478,6 @@ To access data from a name space in an .`astro` file, we use the `t` function. D
 Use `{t("home:layout.title")}` to access the `title` key from the `layout` object in the `home` namespace (=.json file)
 
 
-Data sample:
 `home.json`
 ```json
 "services": [

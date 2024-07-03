@@ -4,6 +4,7 @@
     "projects": "Portfolio",
     "project-1": "Projet 1",
     "project-2": "Projet 2",
+    "blog": "Blog",
 	"contact": "Contact",
     "theme-label": "Select theme",
     "language-label": "Select language",
@@ -42,5 +43,6 @@
         "click": "Nous envoyer un email",
         "p": "Contenu supplémentaire si vous en avez besoin, sinon vous pouvez supprimer tout ce tag <p>. C'est ce que je fais habituellement.",
         "credit": "Conçu et codé maison par "
-    }
+    },
+    "readMore": "Lire l'article"
 }

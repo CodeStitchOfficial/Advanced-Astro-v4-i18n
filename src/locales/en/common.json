@@ -4,6 +4,7 @@
     "projects": "Projects",
     "project-1": "Project 1",
     "project-2": "Project 2",
+    "blog": "Blog",
 	"contact": "Contact",
     "theme-label": "Choisissez le thème",
     "language-label": "Choisissez la langue",
@@ -42,6 +43,7 @@
         "click": "Click to email",
         "p": "Extra content if you need it, if not you can delete this whole p tag. I usually do.",
         "credit": "Designed and Hand Coded by "
-    }
+    },
+    "readMore": "Read More"
     
 }

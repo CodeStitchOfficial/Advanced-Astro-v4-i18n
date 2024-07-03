@@ -11,7 +11,7 @@
       "@data/*": ["src/data/*"],
       "@styles/*": ["src/styles/*"],
       "@components/*": ["src/components/*"],
-      "@libs/*": ["src/libs/*"],
+      "@utils/*": ["src/utils/*"],
       "@i18n/*": ["src/i18n/*"]
     },
     "incremental": true,

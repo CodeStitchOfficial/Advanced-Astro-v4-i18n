@@ -10,3 +10,10 @@ export function formatDate(date) {
 export function getCurrentYear() {
   return new Date().getFullYear();
 }
+
+export function slugify(slug) {
+  const parts = slug.split('/');
+  const result = parts.pop() || parts.pop();
+
+  return result;
+};

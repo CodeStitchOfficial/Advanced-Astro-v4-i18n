@@ -24,6 +24,11 @@ const navData = [
       ]
     },
     {
+      key: "blog",
+      url: "/blog/",
+      children: []
+    },
+    {
       key: "contact",
       url: "/contact/",
       children: []
