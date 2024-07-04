@@ -27,6 +27,7 @@ import Settings from "./TemplateComponents/Settings.astro";
         id="mobile-menu-toggle"
         aria-expanded="false"
         aria-controls="cs-expanded-ul"
+        aria-label="mobile menu toggle"
       >
         <div class="cs-box" aria-hidden="true">
           <span class="cs-line cs-line1" aria-hidden="true"></span>
@@ -84,7 +85,7 @@ import Settings from "./TemplateComponents/Settings.astro";
                 {entry.children?.length > 0 && (
                   // If entry has children in navData.json, create a drop down menu
                   <ul id={`submenu-${entry.key}`} class="cs-drop-ul">
-                    {entry.children.map((child) => (
+                    {entry.children.map((child: any) => (
                       <li class="cs-drop-li">
                         <a
                           href={getLocalePath(child.url)}
