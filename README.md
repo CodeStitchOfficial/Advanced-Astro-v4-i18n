@@ -4,7 +4,7 @@
     This advanced kit includes a pre-configured Astro setup, along with five pages filled with CodeStitch components. Everything is ready to go right from the start, offering a fantastic introduction to the advantages of a Static Site Generator, complete with LESS preprocessing and a multi-language site powered by Astro’s internationalization (i18n) routing. 
     <br/>
     <br/>
-    <a href="https://advanced-astro-kit.netlify.app/" target="_blank">View Live Result</a>
+    <a href="https://advanced-astro-kit-i18n.netlify.app/" target="_blank">View Live Result</a>
   </p>
 
 ## Table of Contents
@@ -90,13 +90,13 @@ This kit ships the following packages:
 |   |   └── images/
 |   ├── components/
 │   │   └── TemplateComponents /* contains all non-UI related components */
+│   ├── content/ /* place your content collections in these sub-folders */
+│   │   ├── blog/ 
+│   │   └── config.ts /* optional - manages schemas for content collection */
 │   ├── data/
 │   │   ├── client.json /* modify your client's information here */
 │   │   └── navData.json /* modify your navigation data here */
 │   ├── icons/ /* place SVGS for the <Icon /> component here */
-|   ├── utils/
-|   |   |── global.d.ts /* used by the ThemeProvider component */
-|   |   └── utils.js /* place any utility functions here */
 │   ├── locales/ /* place your json files for translations in these sub-folders */
 │   │   ├── en 
 │   │   └── fr
@@ -106,8 +106,16 @@ This kit ships the following packages:
 |   |   |── index.astro /* Accessible at / and /fr by default */
 |   |   |—— about.astro /* Accessible at /about and /fr/about by default etc. */
 |   |   |—— contact.astro
+│   │   └── blog/
+│   │   |   ├── [post].astro /* Dynamically generates individual blog pages */
+│   │   |   └── index.astro /* Blog landing page */
 │   │   └── projects/
-|   └── styles/
+│   │       ├── project-1.astro
+│   │       └── project-2.astro
+|   |── styles/
+|   └── utils/
+|       |── global.d.ts /* used by the ThemeProvider component */
+|       └── utils.js /* place any utility functions here */
 ├── .astro.config.mjs
 ├── .postcss.config.cjs
 └── tsconfig.json
@@ -209,7 +217,7 @@ const { title } = Astro.props // Destructure the incoming props. Note the `Astro
 
 ### Adding More Pages
 
-Thanks to Astro Navigation, adding new pages is as simple as adding a file to src/pages/ and including it in the `data/navData.json` file:
+Thanks to Astro Navigation, adding new pages is as simple as adding a file to src/routes/ and including it in the `data/navData.json` file:
 
 ```JSX
 ---
@@ -227,7 +235,7 @@ Thanks to Astro Navigation, adding new pages is as simple as adding a file to sr
 Starting from the top, you can see some data enclosed in --- tags. This is known as the page's front matter, which provides additional data to when it comes to
 rendering your pages.
 
-To add sub-pages, you will first need to create a new folder under `src/pages/` and populate it with `.astro` pages. Look at the `src/pages/projects` forlder for an example. Don't forget to edit `navData.json` to handle the navigation. The navigation bar is already set up to create drop-down menus.
+To add sub-pages, you will first need to create a new folder under `src/routes/` and populate it with `.astro` pages. Look at the `src/pages/projects` folder for an example. Don't forget to edit `navData.json` to handle the navigation. The navigation bar is already set up to create drop-down menus.
 
 <a name="navigationViaNavData"></a>
 
@@ -301,56 +309,6 @@ This will allow you to continue to reap the benefits of navigation vi navData.js
         </ul>
 ```
 
-> Should you wish to use your own method of rendering the navigation, you can still take advantage of applying the "active" class styles by using a smaller amount of code within the class attribute of the link:
-
-```JSX
-<li class="cs-li">
-  <a href="/about" class:list={["cs-li-link, {"cs-active": "/about/" === Astro.url.pathname }]}>About</a>
-</li>
-```
-
-> In this case, if the page slug is "about", the .cs-active class will be applied. You're welcome to adjust the page slug value to whatever you require ("blog", "/", "services", etc)
-> For dropdowns, you can use a similar philosophy on the parent dropdown's class attribute, checking to see if any of the child pages are active before applying the styles. An example of this is shown below:
-
-```JSX
-<li class="nav-link cs-li cs-dropdown">
-  <span class:list={["cs-li-link nav-link",
-    { 'cs-active': '/annapolis-custom-closets/' === Astro.url.pathname },
-    { 'cs-active': '/bowie-custom-closets/' === Astro.url.pathname },
-    { 'cs-active': '/severna-park-custom-closets/' === Astro.url.pathname },
-    { 'cs-active': '/odenton-custom-closets/' === Astro.url.pathname },
-  ]}>
-    Areas Served
-    <img class="cs-drop-icon" src="/assets/images/down.svg" alt="dropdown icon" width="15" height="15" decoding="async" aria-hidden="true">
-  </span>
-  <ul class="cs-drop-ul">
-    <li class="cs-drop-li">
-      <a href="/annapolis-custom-closets" class="cs-drop-link">Annapolis</a>
-    </li>
-    <li class="cs-drop-li">
-      <a href="/bowie-custom-closets" class="cs-drop-link">Bowie</a>
-    </li>
-    <li class="cs-drop-li">
-      <a href="/severna-park-custom-closets" class="cs-drop-link">Severna Park</a>
-    </li>
-    <li class="cs-drop-li">
-      <a href="/odenton-custom-closets" class="cs-drop-link">Odenton</a>
-    </li>
-  </ul>
-</li>
-```
-
-> In the above example, we're checking to see if the active page slug matches any of the four that are listed (annapolis, bowie, severna or odenton) and applying the .cs-active style to the parent if it does.
-
-Below the front matter is the page content. Any code that should be sent to a layout should be enclosed in the layout's component:
-
-```JSX
-<BaseLayout>
-  <!-- Your html/jsx code here -->
-</BaseLayout>
-```
-
-This code will be inserted into the `<slot />` component in BaseLayout.astro.
 
 <a name="builtinastrocomponents"></a>
 
@@ -364,7 +322,6 @@ This kit demonstrates the use of the built-in `<Picture />` component, [for whic
 
 ### i18n
 
- 
 Internationalization is powered by the [I18n for Astro integration plugin](https://astro-i18n.netlify.app/). This project is set up to work with two languages out of the box, English (default language) and French. 
 
 This plugin brings 4 major changes to our project structure:
@@ -432,7 +389,7 @@ Under the hood, [i18next](https://www.i18next.com/) is used to manage translatio
 
 To access data from a name space in an .`astro` file, we use the `t` function. Don't forget to import it first in your astro file with  `import { t } from "i18n:astro";`.
 
-1. First, we create the json data. 
+  1. First, we create the json data. 
 
 `src/locales/fr/common.json`
 ```json
@@ -444,7 +401,7 @@ To access data from a name space in an .`astro` file, we use the `t` function. D
 },
 ```
 
-2. Then, in our `.astro` file, we import the `t` function and use it in JSX:
+  2. Then, in our `.astro` file, we import the `t` function and use it in JSX:
 
 `src/components/CTA.astro`
 ```JSX
@@ -499,7 +456,9 @@ To access data nested in arrays with the `t` function, you can use this syntax: 
 * `0` here is the `[0]` index of the array.
 * `.heading` is tkey object key to access
 
-The t function is re-exported from i18next and benefits from type-safety automatically. Have a look at i18next docs to learn more.
+The t function is re-exported from i18next and benefits from type-safety automatically. Have a look at [i18next docs](https://www.i18next.com/) to learn more.
+
+> Note: You might get TypeScript warnings on this kind of declarations `t("home:services.0.heading")`. They don't stop the translations from running, and are related to an upstream issue with the i18next package.
 
 <a name="astroContentCollections"></a>
 
@@ -509,11 +468,16 @@ In `/src/content`, you will see a `config.ts` file. This is where you can config
   * organize your documents, 
   * validate your frontmatter, 
   * provide automatic TypeScript type-safety for all of your content,
-  * use Astro's `<Image />` and `<Picture />` components with user-uplaoded images via the CMS. 
 
 This template already has Content Collections configured for immediate use of the blog content, but you could use them to power up the Portfolio or Gallery for example.
 
-Content Collections can also be used on content that is not created via the CMS.
+### CSS
+
+Most CSS will be written within the components it's styling via **scoping**. Scoped styles are compiled behind-the-scenes to only apply to HTML written inside of that same component. The CSS that you write inside of an Astro component is automatically encapsulated inside of that
+
+As this kit runs `less`, we use the `<style lang="less"></style> tags to write our scoped CSS.
+
+You can also use standalone `less` stylesheets, located in `src/styles`. Don't forget to import them in your component.
 
 
 <a name="deployment"></a>
