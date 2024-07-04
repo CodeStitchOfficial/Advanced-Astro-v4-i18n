@@ -1,7 +1,7 @@
   <h3 align="center">Advanced Astro v4 - i18n</h3>
 
   <p align="center">
-    This advanced kit includes a pre-configured Astro setup, along with five pages filled with CodeStitch components. Everything is ready to go right from the start, offering a fantastic introduction to the advantages of a Static Site Generator, complete with LESS preprocessing and a multi-language site powered by Astro’s internationalization (i18n) routing. 
+    This Astro advanced kit includes a pre-configured multi-language setup, along with five pages filled with CodeStitch components. Everything is ready to go right from the start, offering a fantastic introduction to the advantages of a Static Site Generator, complete with LESS preprocessing and a blog powered by Astro’s content collections. 
     <br/>
     <br/>
     <a href="https://advanced-astro-kit-i18n.netlify.app/" target="_blank">View Live Result</a>
