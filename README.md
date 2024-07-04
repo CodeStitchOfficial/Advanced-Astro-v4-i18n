@@ -46,6 +46,7 @@ Only the vanilla web technologies are _required_ before using this kit, with som
 
 1. [Astro's Documentation](https://docs.astro.build/en/getting-started/)
 2. [Astro Crash Course in 20 Minutes!](https://www.youtube.com/watch?v=zrPVTf761OI)
+3. [i18next Crash Course](https://www.youtube.com/watch?v=SA_9i4TtxLQ)
 
 
 <a name="features"></a>
