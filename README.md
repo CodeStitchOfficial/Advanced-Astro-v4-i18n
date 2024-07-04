@@ -54,11 +54,10 @@ Only the vanilla web technologies are _required_ before using this kit, with som
 ## Features
 
 * Runs on Astro v4
-* i18n setup ready to go
+* i18n setup ready to go, complete with routing and LanguageSelect component
+* Dark mode
 * Astro's `<ViewTransitions />` integration
-* Components, props and scoped styles, as demonstrated in `/src/components/Landing.astro` for example
-* Astro's built-in components such as `<Picture />`, as demonstrated in `/src/components/Landing.astro` for example
-* Astro's content collections, leveraging image validation. This allows the use of Astro components on user-uploaded images via the CMS, automatically converting your images to modern `.webp` or `.avif` format.
+* Astro's content collections to supercharge your Astro pages and content. 
 * Accessible dropdown menus on desktop navigation and nested pages
 * [CodeStitch](https://codestitch.app/) HTML and CSS blocks to build the UI.
 * Perfect Lighthouse scores
@@ -126,9 +125,7 @@ This kit ships the following packages:
 
 ### Root Files and Folders
 
-- public/ - All assets you don't want optimized by Astro. Include fonts and favicons in here. The \_redirects, robots.txt, and sitemap.xml also live here.
-- public/admin/config.yml - This is where Decap CMS configuration options live. [More information about options in Decap docs](https://decapcms.org/docs/configuration-options/)
-- public/assets/images/blog - This is where the images uploaded on the CMS will be stored
+- public/ - All assets you don't want or need optimized by Astro. Include fonts and favicons in here. The \_redirects, robots.txt, and sitemap.xml also live here.
 - src/ - Raw, source code. The folder you work in.
 - .astro.config.mjs - Astro config file, already set up for you.
 
@@ -465,7 +462,7 @@ The t function is re-exported from i18next and benefits from type-safety automat
 
 ### Astro content collections
 
-In `/src/content`, you will see a `config.ts` file. This is where you can configure [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/). This step is **not necessary** to run the blog with Decap CMS, but it will supercharge your Astro pages and content. Collections help to 
+In `/src/content`, you will see a `config.ts` file. This is where you can configure [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/). This step is **not necessary**, but it will supercharge your Astro pages and content. Collections help to 
   * organize your documents, 
   * validate your frontmatter, 
   * provide automatic TypeScript type-safety for all of your content,
@@ -501,7 +498,7 @@ You can also use standalone `less` stylesheets, located in `src/styles`. Don't f
 ## Acknowledgments
 
 The author would like to acknowledge:
-* [Cedar Studios](https://github.com/cedar-studios) - Their [Intermediate-Astro-Kit-LESS](https://github.com/cedar-studios/Intermediate-Astro-Kit-LESS/tree/master) is the base of this template, which aims to improve on a few issues such as a breaking update to Astro v.4 due to outdated `astro-netlify-cms` integration.
+* [Cedar Studios](https://github.com/cedar-studios) - Their [Intermediate-Astro-Kit-LESS](https://github.com/cedar-studios/Intermediate-Astro-Kit-LESS/tree/master) is the base of this template.
 * [CodeStitch](https://codestitch.app/) - The UI was built with their stitches.
 * [Starlight](https://starlight.astro.build/) - The ThemeProvider and Select components are derived from Starlight
 
