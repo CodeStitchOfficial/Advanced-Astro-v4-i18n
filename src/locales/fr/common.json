@@ -1,11 +1,11 @@
 {
-	"home": "Accueil",
-	"about": "À propos",
+    "home": "Accueil",
+    "about": "À propos",
     "projects": "Portfolio",
     "project-1": "Projet 1",
     "project-2": "Projet 2",
     "blog": "Blog",
-	"contact": "Contact",
+    "contact": "Contact",
     "theme-label": "Select theme",
     "language-label": "Select language",
     "languageSelect": {
@@ -24,7 +24,7 @@
         "title1": "Confiez votre projet",
         "title2": "à nos experts",
         "message": "Dites quelque chose d'accrocheur, d'informatif et d'encourageant à cliquer sur le bouton pour aller à la page de contact. J'aime ajouter cette bannière en bas de chaque page.",
-        "cta":"Obtenir un devis"
+        "cta": "Obtenir un devis"
     },
     "about-page": {
         "landing": "À propos",
@@ -34,7 +34,7 @@
         "p-2": "Nous croyons que In consequat tincidunt turpis sit amet imperdiet. Praesent Class officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent nonatourean olei aptent taciti sociosqu ad litora torquent per.",
         "p-3": "Il est vital de In consequat tincidunt turpis sit amet imperdiet.",
         "rank": "PDG",
-        "cta": "Notre portfolio"    
+        "cta": "Notre portfolio"
     },
     "footer": {
         "information": "informations",

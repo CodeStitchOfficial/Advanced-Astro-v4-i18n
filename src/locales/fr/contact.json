@@ -1,9 +1,8 @@
 {
-	"landing": "Contact",
-	"topper": "Contact",
+    "landing": "Contact",
+    "topper": "Contact",
     "title": "Nous écrire",
     "p-1": "Dites-nous Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ridiculus elementum ullamcorper ipsum porttitor aliquam. Id magna urna ultrices odio pulvinar. Sed ut.",
-
     "form": {
         "name": "Nom",
         "email": "Email",
@@ -13,5 +12,5 @@
         "message-placeholder": "Je serais intéressé par...",
         "address": "Adresse"
     },
-	"cta": "Envoyer votre message"    
+    "cta": "Envoyer votre message"
 }

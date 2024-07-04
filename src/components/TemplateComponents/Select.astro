@@ -1,7 +1,8 @@
 ---
 // Adapted from Starlight's Select component - https://github.com/withastro/starlight/blob/15747325112c9fe43b8dfa4e986b95cf8e66af49/packages/starlight/components/Select.astro
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
+
 <label style={`--select-width: ${Astro.props.width}`}>
 	<span class="sr-only">{Astro.props.label}</span>
 	<Icon name={Astro.props.icon} class="icon label-icon" />
@@ -27,7 +28,7 @@ import { Icon } from 'astro-icon/components';
 		position: relative;
 		&:hover {
 			&:before {
-			width: 100%;
+				width: 100%;
 			}
 		}
 
@@ -44,8 +45,8 @@ import { Icon } from 'astro-icon/components';
 			left: 0;
 			transition: width 0.3s;
 		}
-    }
-	
+	}
+
 	.icon {
 		position: absolute;
 		top: 50%;
@@ -54,12 +55,12 @@ import { Icon } from 'astro-icon/components';
 		color: inherit;
 		width: (15/16rem);
 	}
-	
+
 	.label-icon {
 		font-size: var(--label-icon-size);
 		inset-inline-start: 0;
 	}
-	
+
 	.caret {
 		transform: rotate(180deg) translateY(50%);
 		transition: 0.3s;
@@ -67,10 +68,11 @@ import { Icon } from 'astro-icon/components';
 	}
 
 	select {
-		font-size: clamp(1rem,2.5vw,1.5rem);
+		font-size: clamp(1rem, 2.5vw, 1.5rem);
 		border: 0;
 		padding-block: 0.625rem;
-		padding-inline: calc(var(--label-icon-size) + 0.25rem) calc(var(--caret-size) + 0.25rem);
+		padding-inline: calc(var(--label-icon-size) + 0.25rem)
+			calc(var(--caret-size) + 0.25rem);
 		background-color: transparent;
 		text-overflow: ellipsis;
 		color: inherit;
@@ -80,17 +82,17 @@ import { Icon } from 'astro-icon/components';
 
 	option {
 		background-color: var(--light);
-    	color: var(--grey);
+		color: var(--grey);
 	}
 
 	@media only screen and (min-width: 64rem) {
 		select {
-			font-size: clamp(0.875rem,1vw,1rem);
+			font-size: clamp(0.875rem, 1vw, 1rem);
 		}
 	}
-	
+
 	/* Dark Mode */
-  	body.dark-mode {
+	body.dark-mode {
 		label {
 			color: var(--bodyTextColorWhite);
 			&:before {
@@ -104,6 +106,4 @@ import { Icon } from 'astro-icon/components';
 			padding: 1rem;
 		}
 	}
-
 </style>
-

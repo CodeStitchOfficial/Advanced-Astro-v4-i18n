@@ -5,17 +5,12 @@ import Landing from "@components/Landing.astro";
 import { t } from "i18n:astro";
 ---
 
-<BaseLayout
-  title={t("projects")}
-  description="Meta description for the page"
->
+<BaseLayout title={t("projects")} description="Meta description for the page">
   <!-- ============================================ -->
   <!--                    LANDING                   -->
   <!-- ============================================ -->
 
-  <Landing 
-    title={t("project-1")}
-  />
+  <Landing title={t("project-1")} />
 
   <!-- ============================================ -->
   <!--                   Gallery                    -->
@@ -212,9 +207,7 @@ import { t } from "i18n:astro";
       <a href="/contact" class="cs-button-solid">Get Free Quote</a>
     </div>
   </section>
-  <CTA 
-    
-  />
+  <CTA />
 </BaseLayout>
 
 <style lang="less">

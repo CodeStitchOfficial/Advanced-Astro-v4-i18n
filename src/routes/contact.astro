@@ -4,7 +4,6 @@ import client from "@data/client.json";
 import Landing from "@components/Landing.astro";
 
 import { t } from "i18n:astro";
-
 ---
 
 <BaseLayout
@@ -15,9 +14,7 @@ import { t } from "i18n:astro";
   <!--                    LANDING                   -->
   <!-- ============================================ -->
 
-  <Landing 
-    title={t("contact:landing")}
-  />
+  <Landing title={t("contact:landing")} />
 
   <!-- ============================================ -->
   <!--                Contact Form                  -->
@@ -80,7 +77,8 @@ import { t } from "i18n:astro";
             id="message"
             placeholder={t("contact:form.message-placeholder")}></textarea>
         </label>
-        <button class="cs-button-solid" type="submit">{t("contact:cta")}</button>
+        <button class="cs-button-solid" type="submit">{t("contact:cta")}</button
+        >
       </form>
       <div class="cs-right-section">
         <!--Email-->
