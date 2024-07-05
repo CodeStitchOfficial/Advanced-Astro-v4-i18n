@@ -10,8 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrolicious/i18n": "^0.4.2",
-    "astro": "^4.11.3",
+    "@astrolicious/i18n": "^0.4.3",
+    "astro": "^4.11.5",
     "astro-icon": "^1.1.0",
     "autoprefixer": "^10.4.19",
     "decap-server": "^3.0.4",
