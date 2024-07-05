@@ -17,8 +17,5 @@
     "decap-server": "^3.0.4",
     "i18next": "^23.11.5",
     "less": "^4.2.0"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
   }
 }

@@ -456,8 +456,6 @@ To access data nested in arrays with the `t` function, you can use this syntax: 
 
 The t function is re-exported from i18next and benefits from type-safety automatically. Have a look at [i18next docs](https://www.i18next.com/) to learn more.
 
-> Note: You might get TypeScript warnings on this kind of declarations `t("home:services.0.heading")`. They don't stop the translations from running, and are related to an upstream issue with the i18next package.
-
 <a name="astroContentCollections"></a>
 
 ### Astro content collections
