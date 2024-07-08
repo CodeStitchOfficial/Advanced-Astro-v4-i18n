@@ -1,0 +1,21 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getLocalePath, t } from "i18n:astro"
+
+export const prerender = false;
+
+const title = t("404.pageNotFound");
+---
+
+<BaseLayout
+  title={title}
+  description={title}
+>
+<h1>{title}</h1>
+<!-- <a
+href={getLocalePath("/")}
+>
+{t("404.pageNotFound")} -->
+</a>
+</BaseLayout>
+
