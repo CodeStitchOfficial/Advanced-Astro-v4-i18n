@@ -19,9 +19,10 @@
 - [Expanding the Project](#expandingTheProject)
   - [Reusing Code](#reusingCode)
   - [Adding More Pages](#addingMorePages)
-  - [i18n](#i18n)
   - [Navigation via NavData.json](#navigationViaNavData)
   - [Built-in Astro components](#builtinastrocomponents)
+  - [i18n](#i18n)
+  - [404](#404)
   - [Astro Content Collections](#AstroContentCollections)
 - [Deployment](#deployment)
 - [Acknowledgments](#acknowledgments)
@@ -455,6 +456,14 @@ To access data nested in arrays with the `t` function, you can use this syntax: 
 * `.heading` is tkey object key to access
 
 The t function is re-exported from i18next and benefits from type-safety automatically. Have a look at [i18next docs](https://www.i18next.com/) to learn more.
+
+<a name="404"></a>
+
+### 404
+
+As we are creating a fully static site, we need to generate a 404 page per locale and rewrite paths with the hosting provider. This is respectively handled in `src/routes/404.astro` for the page and in the `public/_redirects` file for rewriting paths for projects hosted on **Netlify**.
+For other hosting providers, or if you want a solution for a hybrid/server-side rendering site, please look at the [i18n package documentation](https://astro-i18n.netlify.app/recipes/translated-404-pages/).
+
 
 <a name="astroContentCollections"></a>
 
