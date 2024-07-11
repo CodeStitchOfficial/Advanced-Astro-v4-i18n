@@ -8,6 +8,7 @@ import { Icon } from "astro-icon/components";
 	<Icon name={Astro.props.icon} class="icon label-icon" />
 	<select value={Astro.props.value}>
 		{
+			// just a type warning - you can safely ignore it.
 			Astro.props.options.map(({ value, selected, label }) => (
 				<option value={value} selected={selected} set:html={label} />
 			))

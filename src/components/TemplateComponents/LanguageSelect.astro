@@ -16,7 +16,8 @@ const data = getSwitcherData();
 				options={data.map((option) => ({
 					value: option.href,
 					selected: option.locale === locale,
-					label: t(`languageSelect.${option.locale}`),
+					// just a type warning from the i18n package - you can safely ignore it.
+					label: t(`languageSelect.${option.locale}`), 
 				}))}
 				width="6em"
 			/>
