@@ -7,6 +7,9 @@ import { Icon } from "astro-icon/components";
 <script is:inline>
 	window.StarlightThemeProvider = (() => {
 		const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('cs-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
 		
 		return {
 			updatePickers(theme = storedTheme || 'auto') {

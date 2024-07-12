@@ -1,15 +1,27 @@
 ---
 // Adapted from Starlight's Select component - https://github.com/withastro/starlight/blob/15747325112c9fe43b8dfa4e986b95cf8e66af49/packages/starlight/components/Select.astro
 import { Icon } from "astro-icon/components";
+
+interface Props {
+	label: string;
+	value: string;
+	icon: Parameters<typeof Icon>[0]['name'];
+	width?: string;
+	options: Array<{
+		label: string;
+		value: string;
+		selected: boolean;
+	}>;
+}
+const { width, label, icon, value, options } = Astro.props
 ---
 
-<label style={`--select-width: ${Astro.props.width}`}>
-	<span class="sr-only">{Astro.props.label}</span>
-	<Icon name={Astro.props.icon} class="icon label-icon" />
-	<select value={Astro.props.value}>
+<label style={`--select-width: ${width}`}>
+	<span class="sr-only">{label}</span>
+	<Icon name={icon} class="icon label-icon" />
+	<select value={value}>
 		{
-			// just a type warning - you can safely ignore it.
-			Astro.props.options.map(({ value, selected, label }) => (
+			options.map(({ value, selected, label }) => (
 				<option value={value} selected={selected} set:html={label} />
 			))
 		}
