@@ -43,7 +43,7 @@ vanilla component library</a>. This kit aims to get any project off the ground i
 2. Follow the instructions to create a new repository, using this repo as a template.
 3. When created, clone the repository to your local machine.
 4. Run `npm install` to install all dependencies.
-5. Run `npm run dev` to start the project and spin up a development server on `localhost:4321` and a Decap admin server on `localhost:8081`.
+5. Run `npm run dev` to start the project and spin up a development server on `localhost:4321`.
 
 Running `npm run dev` will start a development server and begin LESS preprocessing.
 
