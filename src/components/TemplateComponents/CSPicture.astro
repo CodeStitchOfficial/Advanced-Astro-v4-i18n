@@ -1,0 +1,80 @@
+---
+ import { getImage } from "astro:assets";
+
+ interface Props {
+    mobileImgUrl: string | ImageMetadata;
+    desktopImgUrl: string | ImageMetadata;
+    alt: string;
+}
+
+const { mobileImgUrl, desktopImgUrl, alt } = Astro.props;
+
+const mobileImg = await getImage({
+    src: mobileImgUrl,
+    format: "webp",
+    width: 200,
+    height: 200,
+});
+
+const desktopImg = await getImage({
+    src: desktopImgUrl,
+    format: "webp",
+    width: 800,
+    height: 200,
+});
+---
+
+<picture>
+    <source media="(max-width: 600px)" srcset={mobileImg.src} />
+    <source media="(min-width: 601px)" srcset={desktopImg.src} />
+    <img
+      aria-hidden="true"
+      decoding="async"
+      src={desktopImg.src}
+      alt={alt}
+      loading="lazy"
+      width="2500"
+      height="1667"
+    />
+</picture>
+
+<style lang="less">
+    picture {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -2;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    @media only screen and (min-width: 1300px) {
+        picture {
+        width: 90.0625%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &:before {
+          content: "";
+          width: 100%;
+          height: 100%;
+          background: #000;
+          opacity: 0.7;
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+      }
+    }
+</style>
