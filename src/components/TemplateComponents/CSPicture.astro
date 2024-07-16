@@ -7,10 +7,11 @@ interface Props {
     mobileMediaWidth: string;
     desktopImgUrl: string | ImageMetadata;
     desktopMediaWidth: string;
+    fallbackImgUrl: string | ImageMetadata;
     alt: string;
 }
 
-const { mobileImgUrl, mobileMediaWidth, desktopImgUrl, desktopMediaWidth, alt } = Astro.props;
+const { mobileImgUrl, mobileMediaWidth, desktopImgUrl, desktopMediaWidth, fallbackImgUrl, alt } = Astro.props;
 
 const mobileImg = await getImage({
     src: mobileImgUrl,
@@ -27,6 +28,14 @@ const desktopImg = await getImage({
     width: 800,
     height: 200,
 });
+
+const fallbackImg = await getImage({
+    src: fallbackImgUrl,
+    format: "jpg",
+    // Adjust the width and height to play with the image's intrinsic size and ultimately, its file size
+    width: 800,
+    height: 200,
+});
 ---
 
 <!-- Adjust the width and height attributes sizes based on the stitch you're using -->
@@ -36,7 +45,7 @@ const desktopImg = await getImage({
     <img
       aria-hidden="true"
       decoding="async"
-      src={desktopImg.src}
+      src={fallbackImg.src}
       alt={alt}
       loading="lazy"
       width="2500"

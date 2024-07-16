@@ -20,6 +20,7 @@
 - [Expanding the Project](#expandingTheProject)
   - [i18n](#i18n)
   - [404](#404)
+  - [Custom Picture component](#Custompicturecomponent)
   - [Astro Content Collections](#AstroContentCollections)
 - [Deployment](#deployment)
 - [Acknowledgments](#acknowledgments)
@@ -416,6 +417,47 @@ To access data nested in arrays with the `t` function, you can use this syntax: 
 * `.heading` is tkey object key to access
 
 The t function is re-exported from i18next and benefits from type-safety automatically. Have a look at [i18next docs](https://www.i18next.com/) to learn more.
+
+
+<a name="Custom Picture component"></a>
+
+### Custompicturecomponent
+
+Astro provides two built-in components that you can use to display and optimize your images. 
+ * The <Picture> component allows you to display responsive images and work with different formats and sizes. 
+ * The <Image> component will optimize your images and allow you to pass in different formats and quality properties.
+
+If you want to replicate the `<picture>` elements with multiple `srcset` found in many Stitches, you can use our custom `<CSPicture />` component located in `/src/Components/TemplateComponents`.  
+
+It uses <a href="https://docs.astro.build/en/recipes/build-custom-img-component/">Astro's `getImage()` function</a> to create a custom image component that displays different source images based on media queries.
+
+> Note: the component will automatically convert your .jpg files to .webp! 
+
+```JSX
+
+---
+// Import the component and all the images you want to use with it
+import CSPicture from "@components/TemplateComponents/CSPicture.astro";
+import mobileImage from "@assets/images/construction-m.jpg"
+import desktopImage from "@assets/images/cabinets2.jpg"
+import fallbackImage from "@assets/images/cabinets2.jpg"
+---
+
+  <CSPicture
+    mobileImgUrl={mobileImage}
+    mobileMediaWidth="600px"
+    desktopImgUrl={desktopImage}
+    desktopMediaWidth="601px"
+    fallbackImgUrl={fallbackImage}
+    alt=""
+  />
+```
+
+It is currently set up to 
+1. accept 3 images (mobile, desktop and fallback) that can be not only different sizes, crops but also completely different assets, as demnnstrated here.
+2. accept mobile and desktop media width if you want to adjust these sizes on a case by case basis.
+
+You can of course adjust the sizes of attributes baased on your customization's needs directly in the component.
 
 <a name="404"></a>
 
