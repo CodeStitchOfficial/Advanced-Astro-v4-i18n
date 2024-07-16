@@ -11,6 +11,7 @@
 
 - [Overview](#overview)
 - [Getting Started](#gettingStarted)
+- [Commands](#commands)
 - [Prerequisites](#prerequisites)
 - [Features](#features)
 - [Project Structure](#projectStructure)
@@ -51,6 +52,21 @@ Next, it is recommended to update `data/client.json` with some new information a
 project's `<head>` and contact information will automatically be filled out, providing a first peek into some of the benefits of SSGs.
 
 You can find all of CodeStitches `:root` variables, as well as .cs-topper, .cs-title and .cs-text, within the `root` stylesheet. Feel free to adjust these, or use our Content Flair micro-stitches, to update site-wide styles quickly.
+
+<a name="commands"></a>
+
+## Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
 <a name="prerequisites"></a>
 
