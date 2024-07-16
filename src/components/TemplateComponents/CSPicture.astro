@@ -1,17 +1,21 @@
 ---
- import { getImage } from "astro:assets";
+import { getImage } from "astro:assets";
 
- interface Props {
+// TS types
+interface Props {
     mobileImgUrl: string | ImageMetadata;
+    mobileMediaWidth: string;
     desktopImgUrl: string | ImageMetadata;
+    desktopMediaWidth: string;
     alt: string;
 }
 
-const { mobileImgUrl, desktopImgUrl, alt } = Astro.props;
+const { mobileImgUrl, mobileMediaWidth, desktopImgUrl, desktopMediaWidth, alt } = Astro.props;
 
 const mobileImg = await getImage({
     src: mobileImgUrl,
     format: "webp",
+    // Adjust the width and height to play with the image's intrinsic size and ultimately, its file size
     width: 200,
     height: 200,
 });
@@ -19,14 +23,16 @@ const mobileImg = await getImage({
 const desktopImg = await getImage({
     src: desktopImgUrl,
     format: "webp",
+    // Adjust the width and height to play with the image's intrinsic size and ultimately, its file size
     width: 800,
     height: 200,
 });
 ---
 
+<!-- Adjust the width and height attributes sizes based on the stitch you're using -->
 <picture>
-    <source media="(max-width: 600px)" srcset={mobileImg.src} />
-    <source media="(min-width: 601px)" srcset={desktopImg.src} />
+    <source media=`(max-width: ${mobileMediaWidth})` srcset={mobileImg.src} />
+    <source media=`(min-width: ${desktopMediaWidth})` srcset={desktopImg.src} />
     <img
       aria-hidden="true"
       decoding="async"
@@ -38,6 +44,7 @@ const desktopImg = await getImage({
     />
 </picture>
 
+<!-- Adjust the styles based on the stitch you're using -->
 <style lang="less">
     picture {
         width: 100%;
