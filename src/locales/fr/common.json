@@ -21,10 +21,11 @@
     "quote": "Obtenir devis gratuit",
     "estimate": "Obtenir un devis",
     "ctaComponent": {
-        "title1": "Confiez votre projet",
-        "title2": "à nos experts",
+        "title": "Confiez votre projet",
+        "subtitle": "à nos experts",
         "message": "Dites quelque chose d'accrocheur, d'informatif et d'encourageant à cliquer sur le bouton pour aller à la page de contact. J'aime ajouter cette bannière en bas de chaque page.",
-        "cta": "Obtenir un devis"
+        "cta": "Obtenir un devis",
+        "alt":" "
     },
     "about-page": {
         "landing": "À propos",

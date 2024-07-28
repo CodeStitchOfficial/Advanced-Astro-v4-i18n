@@ -21,10 +21,11 @@
     "quote": "Get Free Quote",
     "estimate": "Get an estimate now",
     "ctaComponent": {
-        "title1": "Get it done",
-        "title2": "With us today",
+        "title": "Get it done",
+        "subtitle": "With us today",
         "message": "Say something catchy, informative, and encouraging to click the button to go to the contact page. I like to add these to the bottom of all pages.",
-        "cta": "Get an estimate now"
+        "cta": "Get an estimate now",
+        "alt": ""
     },
     "about-page": {
         "landing": "About",
