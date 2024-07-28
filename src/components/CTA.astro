@@ -2,7 +2,7 @@
 import { t } from "i18n:astro";
 // Import the component and all the images you want to use with it
 import CSPicture from "@components/TemplateComponents/CSPicture.astro";
-import mobileImage from "@assets/images/CTA/construction-m.webp"
+import mobileImage from "@assets/images/CTA/construction-m.jpg"
 import desktopImage from "@assets/images/CTA/cabinets2.jpg"
 import fallbackImage from "@assets/images/CTA/cabinets2.jpg"
 ---
@@ -10,9 +10,9 @@ import fallbackImage from "@assets/images/CTA/cabinets2.jpg"
 <section id="cta">
   <div class="container">
     <h2 class="title">
-      {t("ctaComponent.title1")}
+      {t("ctaComponent.title")}
       <br />
-      {t("ctaComponent.title2")}
+      {t("ctaComponent.subtitle")}
     </h2>
     <p>
       {t("ctaComponent.message")}
@@ -25,7 +25,7 @@ import fallbackImage from "@assets/images/CTA/cabinets2.jpg"
     desktopImgUrl={desktopImage}
     desktopMediaWidth="601px"
     fallbackImgUrl={fallbackImage}
-    alt=""
+    alt={t("ctaComponent.alt")}
   />
 </section>
 
