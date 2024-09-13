@@ -23,6 +23,8 @@ import Select from "./Select.astro";
 import { getLocale, getSwitcherData, t } from "i18n:astro";
 const locale = getLocale();
 const data = getSwitcherData();
+
+
 ---
 
 {
@@ -33,10 +35,11 @@ const data = getSwitcherData();
 				label={locale}
 				value={locale}
 				options={data.map((option) => ({
+					
 					value: option.href,
 					selected: option.locale === locale,
 					// just a type warning from the i18n package - you can safely ignore it.
-					label: t(`languageSelect.${option.locale}`), 
+					label: t(`languageSelect.${option.locale}`)  
 				}))}
 				width="6em"
 			/>

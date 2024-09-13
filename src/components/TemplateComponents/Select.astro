@@ -41,7 +41,7 @@ const { width, label, icon, value, options } = Astro.props
 	<select value={value}>
 		{
 			options.map(({ value, selected, label }) => (
-				<option value={value} selected={selected} set:html={label} />
+				<option value={value} selected={selected} label={label} />
 			))
 		}
 	</select>
