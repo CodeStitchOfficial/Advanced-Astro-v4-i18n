@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 import I18nClient from "@astrolicious/i18n/components/I18nClient.astro"
+import { getHtmlAttrs } from "i18n:astro";
 import client from "@data/client.json";
 import ThemeProvider from "@components/TemplateComponents/ThemeProvider.astro";
 import Header from "@components/Header.astro";
@@ -8,13 +9,10 @@ import Footer from "@components/Footer.astro";
 import "@styles/root.less";
 
 const {description, title} = Astro.props;
-import { getLocale} from "i18n:astro";
-
-const locale = getLocale();
 ---
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
-<html lang={locale}>
-    <head>
+    <html {...getHtmlAttrs()}> <!-- Automatically generates attributes -->
+        <head>
         <!-- i18n support -->
         <I18nClient />
         <!-- View Transitions support -->

@@ -45,7 +45,7 @@
         "p": "Contenu supplémentaire si vous en avez besoin, sinon vous pouvez supprimer tout ce tag <p>. C'est ce que je fais habituellement.",
         "credit": "Conçu et codé maison par "
     },
-    "404": {
+    "notFound": {
         "pageNotFound": "404 - La page que vous cherchez n'existe pas.",
         "linkText": "Retourner à la page d'accueil"
     }

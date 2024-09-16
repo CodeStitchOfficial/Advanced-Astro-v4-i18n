@@ -11,7 +11,6 @@ const navData = [
   },
   {
     key: "projects",
-    url: "/projects/",
     children: [
       {
         key: "project-1",
