@@ -5,13 +5,13 @@ import Picture from "astro/components/Picture.astro";
 import landingImage from "@assets/images/landing.jpg";
 export const prerender = false;
 
-const title = t("404.pageNotFound");
+const title = t("notFound.pageNotFound");
 ---
-
+<!-- This 404 page is currently not working as intended - at least in dev mode - throwing Cannot read properties of undefined (reading 'translations') -->
 <BaseLayout title={title} description={title}>
   <section id="int-hero">
     <h1>{title}</h1>
-    <a href={getLocalePath("/")} class="cs-button-solid">{t("404.linkText")}</a>
+    <a href={getLocalePath("/")} class="cs-button-solid">{t("notFound.linkText")}</a>
     <Picture
       src={landingImage}
       formats={["avif", "webp"]}
