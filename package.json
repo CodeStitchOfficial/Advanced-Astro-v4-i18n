@@ -15,6 +15,7 @@
     "astro-icon": "^1.1.1",
     "autoprefixer": "^10.4.19",
     "decap-server": "^3.0.4",
+    "i18next": "^23.15.1",
     "less": "^4.2.0"
   }
 }
