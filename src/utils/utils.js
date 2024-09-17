@@ -11,9 +11,9 @@ export function getCurrentYear() {
   return new Date().getFullYear();
 }
 
+// This function is used to create localized slugs for blog posts
 export function slugify(slug) {
   const parts = slug.split('/');
   const result = parts.pop() || parts.pop();
-
   return result;
 };
