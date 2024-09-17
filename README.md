@@ -19,7 +19,6 @@
   - [Source Files and Folders](#sourceFilesAndFolders)
 - [Expanding the Project](#expandingTheProject)
   - [i18n](#i18n)
-  - [404](#404)
   - [Custom Picture component](#Custompicturecomponent)
   - [Astro Content Collections](#AstroContentCollections)
 - [Deployment](#deployment)
@@ -284,7 +283,7 @@ practices for when it comes to building on top of this kit:
 
 Internationalization is powered by the [I18n for Astro integration plugin](https://astro-i18n.netlify.app/). This project is set up to work with two languages out of the box, English (default language) and French. 
 
-This plugin brings 4 major changes to our project structure:
+This plugin brings 5 major changes to our project structure:
 
 1. in `astro.config.js`
 
@@ -366,7 +365,7 @@ To access data from a name space in an .`astro` file, we use the `t` function. D
 `src/components/CTA.astro`
 ```JSX
 ---
-import { t } from "i18n:astro";
+import { t, getLocalePath } from "i18n:astro";
 ---
 <div class="container">
   <h2 class="title">
@@ -377,7 +376,7 @@ import { t } from "i18n:astro";
   <p>
     {t("ctaComponent.message")}
   </p>
-  <a href="/contact" class="cs-button-solid">{t("ctaComponent.cta")}</a>
+  <a href={getLocalePath("/contact")} class="cs-button-solid">{t("ctaComponent.cta")}</a>
 </div>
 ```
 
@@ -418,6 +417,16 @@ To access data nested in arrays with the `t` function, you can use this syntax: 
 
 The t function is re-exported from i18next and benefits from type-safety automatically. Have a look at [i18next docs](https://www.i18next.com/) to learn more.
 
+5. getLocalePath
+Create hrefs using `getLocalePath` to allow you get the right url for the current locale.
+
+```jsx
+---
+import { getLocalePath } from "i18n:astro"
+---
+// This link will take you to "/contact" or "/fr/contact" depending on the current locale
+<a href={getLocalePath("/contact")} class="cs-button-solid">Dynamic link</a>
+```
 
 <a name="Custom Picture component"></a>
 
@@ -458,13 +467,6 @@ It is currently set up to
 2. accept mobile and desktop media width if you want to adjust these sizes on a case by case basis.
 
 You can of course adjust the sizes of attributes baased on your customization's needs directly in the component.
-
-<a name="404"></a>
-
-### 404
-
-As we are creating a fully static site, we need to generate a 404 page per locale and rewrite paths with the hosting provider. This is respectively handled in `src/routes/404.astro` for the page and in the `public/_redirects` file for rewriting paths for projects hosted on **Netlify**.
-For other hosting providers, or if you want a solution for a hybrid/server-side rendering site, please look at the [i18n package documentation](https://astro-i18n.netlify.app/recipes/translated-404-pages/).
 
 
 <a name="astroContentCollections"></a>

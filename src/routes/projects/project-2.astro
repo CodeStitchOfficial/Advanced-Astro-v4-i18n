@@ -2,7 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
 import Landing from "@components/Landing.astro";
-import { t } from "i18n:astro";
+import { getLocalePath, t } from "i18n:astro";
 ---
 
 <BaseLayout title={t("projects")} description="Meta description for the page">
@@ -204,7 +204,7 @@ import { t } from "i18n:astro";
           <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
         </div>
       </div>
-      <a href="/contact" class="cs-button-solid">Get Free Quote</a>
+      <a href={getLocalePath("/contact")} class="cs-button-solid">{t("ctaComponent.cta")}</a>
     </div>
   </section>
   <CTA />

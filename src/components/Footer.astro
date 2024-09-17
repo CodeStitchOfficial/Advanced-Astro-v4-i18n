@@ -11,7 +11,7 @@ const currentYear = getCurrentYear();
 <footer id="footer">
   <div class="container">
     <section class="left-section">
-      <a class="logo" href="/"
+      <a class="logo" href={getLocalePath("/")}
         ><img
           loading="lazy"
           decoding="async"
@@ -54,7 +54,7 @@ const currentYear = getCurrentYear();
             <h2>{t("footer.contact")}</h2>
           </li>
           <li>
-            <a href="/contact">
+            <a href={getLocalePath("/contact")}>
               {client.address.lineOne}<br />
               {client.address.lineTwo}<br />
               {client.address.city}
@@ -78,7 +78,7 @@ const currentYear = getCurrentYear();
 
   <section class="credit">
     <span>{t("footer.credit")}</span>
-    <a href="/" target="_blank" rel="noopener">Your Company Name</a>
+    <a href={getLocalePath("/")} target="_blank" rel="noopener">Your Company Name</a>
     <span class="copyright"> Copyright {currentYear}</span>
   </section>
 </footer>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
-import { t } from "i18n:astro";
+import { getLocalePath, t } from "i18n:astro";
 ---
 
 <BaseLayout
@@ -24,8 +24,8 @@ import { t } from "i18n:astro";
         <p class="cs-text">
           {t("home:hero.p1")}
         </p>
-        <a href="/about" class="cs-button-solid">{t("home:hero.cta1")}</a>
-        <a href="/contact" class="cs-button-transparent">
+        <a href={getLocalePath("/about")} class="cs-button-solid">{t("home:hero.cta1")}</a>
+        <a href={getLocalePath("/contact")} class="cs-button-transparent">
           <img
             class="cs-img"
             loading="lazy"
@@ -185,7 +185,7 @@ import { t } from "i18n:astro";
             height="77"
           />
         </div>
-        <a href="/about" class="cs-button-solid">{t("home:about.cta")}</a>
+        <a href={getLocalePath("/about")} class="cs-button-solid">{t("home:about.cta")}</a>
       </div>
     </div>
   </section>
@@ -446,7 +446,6 @@ import { t } from "i18n:astro";
           </picture>
         </div>
       </div>
-      <a href="/projects" class="cs-button-solid">{t("home:portfolio.cta")}</a>
     </div>
   </section>
 
@@ -523,7 +522,7 @@ import { t } from "i18n:astro";
           />
         </li>
       </ul>
-      <a aria-label="read more reviews" href="/reviews" class="cs-button-solid"
+      <a href={getLocalePath("/reviews")} class="cs-button-solid"
         >{t("home:reviews.cta")}</a
       >
     </div>
