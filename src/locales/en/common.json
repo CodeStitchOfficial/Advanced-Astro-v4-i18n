@@ -48,5 +48,6 @@
     "notFound": {
         "pageNotFound": "404 - The page you're looking for does not exist.",
         "linkText": "Back to homepage"
-    }
+    },
+    "skipLink": "Click To Skip To Main Content"
 }
