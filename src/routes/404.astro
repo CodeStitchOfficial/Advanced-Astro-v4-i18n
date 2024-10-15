@@ -2,12 +2,15 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getLocalePath, t } from "i18n:astro";
 import Picture from "astro/components/Picture.astro";
-import landingImage from "@assets/images/landing.jpg";
 export const prerender = false;
 const title = t("notFound.pageNotFound");
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import {getOptimizedImage} from "@utils/utils"
+import landingImage from "@assets/images/landing.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+const optimizedImage = await getOptimizedImage(landingImage)
 ---
-<!-- This 404 page is currently not working as intended - at least in dev mode - throwing Cannot read properties of undefined (reading 'translations') -->
-<BaseLayout title={title} description={title}>
+<BaseLayout title={title} description={title} preloadedImage = {optimizedImage}>
   <section id="int-hero">
     <h1>{title}</h1>
     <a href={getLocalePath("/")} class="cs-button-solid">{t("notFound.linkText")}</a>
