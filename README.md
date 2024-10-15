@@ -21,6 +21,7 @@
   - [i18n](#i18n)
   - [Custom Picture component](#Custompicturecomponent)
   - [Astro Content Collections](#AstroContentCollections)
+  - [Preloading images](#preloadingimages)
 - [Deployment](#deployment)
 - [Acknowledgments](#acknowledgments)
 - [Conclusion](#conclusion)
@@ -158,7 +159,7 @@ Astro leverages an opinionated folder layout for your project. Every Astro proje
 |   |── styles/
 |   └── utils/
 |       |── global.d.ts /* used by the ThemeProvider component */
-|       └── utils.js /* place any utility functions here */
+|       └── utils.ts /* place any utility functions here */
 ├── .astro.config.mjs
 ├── .postcss.config.cjs
 └── tsconfig.json
@@ -480,6 +481,23 @@ In `/src/content`, you will see a `config.ts` file. This is where you can config
 
 This template already has Content Collections configured for immediate use of the blog content, but you could use them to power up the Portfolio or Gallery for example.
 
+<a name="preloadingimages"></a>
+
+### Preloading images
+THis kit takes advantage of the [preload attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload) to fetch images above the fold with higher priority, resulting in improved performances and reducing flashes of unstyled content. Preloaded images are used on the index page for the hero image as well as on all other pages in the Landing component.
+
+You will notice this snippet at the top of every `.astro` page:
+
+```jsx
+---
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import {getOptimizedImage} from "../js/utils"
+import landingImage from "../assets/images/landing.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+const optimizedImage = await getOptimizedImage(landingImage)
+---
+```
+
+You only need to change the path of the asset you want to preload. The rest is managed behind the scenes.
 
 
 <a name="deployment"></a>
