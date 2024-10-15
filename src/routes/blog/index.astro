@@ -9,23 +9,31 @@ import { getCollection } from "astro:content";
 const locale = getLocale();
 
 // Filters blog entries by locale
+// @ts-ignore
 const posts = await getCollection("blog", ({ id }) => {
     return id.startsWith(locale);
 });
 posts.sort(
+    // @ts-ignore
     (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
 );
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import {getOptimizedImage} from "@utils/utils"
+import landingImage from "@assets/images/landing.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+const optimizedImage = await getOptimizedImage(landingImage)
 ---
 
 <BaseLayout
     title={t("blog:landing")}
     description="Meta description for the page"
+    preloadedImage = {optimizedImage}
 >
     <!-- ============================================ -->
     <!--                    LANDING                   -->
     <!-- ============================================ -->
 
-    <Landing title={t("blog:landing")} />
+    <Landing title={t("blog:landing")} image = {optimizedImage}/>
 
     <!-- ============================================ -->
     <!--                    Blog                      -->
@@ -41,7 +49,7 @@ posts.sort(
             </div>
             <ul class="cs-card-group">
                 {posts.length === 0 && <h2>No Recent Posts</h2>}
-                {posts.map((post) => <BlogPreview post={post} />)}
+                {posts.map((post: any) => <BlogPreview post={post} />)}
             </ul>
         </div>
     </section>

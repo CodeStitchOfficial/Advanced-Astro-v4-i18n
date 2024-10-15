@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { slugify } from "@utils/utils.js";
+import { slugify } from "@utils/utils.ts";
 import { getLocalePlaceholder, t } from "i18n:astro";
 import { collectionFilters } from "@astrolicious/i18n/content-collections";
 import BaseLayout from "src/layouts/BaseLayout.astro";
@@ -11,23 +11,29 @@ import FeaturedPost from "@components/FeaturedPost.astro";
 // Generates paths for blog posts, filtered by locale.
 export const getStaticPaths = async () => {
   const locale = getLocalePlaceholder();
-  const posts = await getCollection("blog", (post) =>
+  const posts = await getCollection("blog", (post: any) =>
     collectionFilters.byLocale(post, { locale }),
   );
-  return posts.map((entry) => ({
+  return posts.map((entry: any) => ({
     params: { post: slugify(entry.slug) },
     props: { post: entry },
   }));
 };
 
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import {getOptimizedImage} from "@utils/utils"
+import landingImage from "@assets/images/landing.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+const optimizedImage = await getOptimizedImage(landingImage)
+
 const { post } = Astro.props;
 ---
 
 <BaseLayout
-  title={t("blog:landing")}
-  description="Meta description for the page"
+    title={t("blog:landing")}
+    description="Meta description for the page"
+    preloadedImage = {optimizedImage}
 >
-  <Landing title={t("blog:landing")} />
+  <Landing title={t("blog:landing")} image = {optimizedImage}/>
 
   <section class="main-content-wrapper">
     <!--Main content -->

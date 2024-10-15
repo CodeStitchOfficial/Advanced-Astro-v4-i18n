@@ -2,11 +2,20 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
 import { getLocalePath, t } from "i18n:astro";
+import {getOptimizedImage} from "@utils/utils"
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Hero (for rendering)
+import landingImage from "@assets/images/hero.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import mobileLandingImage from "@assets/images/hero-m.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+const optimizedLandingImage = await getOptimizedImage(landingImage)
+const optimizedMobileLandingImage = await getOptimizedImage(mobileLandingImage)
 ---
 
 <BaseLayout
   title={t("home:layout.title")}
   description={t("home:layout.description")}
+  preloadedImage = {optimizedMobileLandingImage}
+
 >
   <!-- ============================================ -->
   <!--                    Hero                      -->
@@ -43,16 +52,15 @@ import { getLocalePath, t } from "i18n:astro";
     <!-- Background Image -->
     <!-- We can't use Astro <Picture /> as it does not support multiple sources -->
     <picture class="cs-picture">
-      <source media="(max-width: 600px)" srcset="/assets/images/hero-m.webp" />
-      <source media="(min-width: 601px)" srcset="/assets/images/hero.jpg" />
+      <source media="(max-width: 600px)" srcset={optimizedMobileLandingImage.src} />
+      <source media="(min-width: 601px)" srcset={optimizedLandingImage.src} />
       <img
         aria-hidden="true"
-        decoding="async"
-        src="/assets/images/hero.jpg"
-        alt="new home"
-        width="2500"
-        height="1667"
+        src={optimizedLandingImage.src}
+        width={optimizedLandingImage.attributes.width}
+        height={optimizedLandingImage.attributes.height}
         loading="eager"
+        alt=""
       />
     </picture>
   </section>
@@ -755,14 +763,14 @@ import { getLocalePath, t } from "i18n:astro";
 
   /* Desktop Parallax Effect - 1300px */
   @media only screen and (min-width: 81.25em) {
-    #hero {
-      background: url("/assets/images/hero.jpg");
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      /* creates parallax effect on background image */
-      background-attachment: fixed;
-    }
+    // #hero {
+    //   background: url("/assets/images/hero.jpg");
+    //   background-position: center;
+    //   background-size: cover;
+    //   background-repeat: no-repeat;
+    //   /* creates parallax effect on background image */
+    //   background-attachment: fixed;
+    // }
   }
 
   /* Dark Mode */

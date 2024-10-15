@@ -1,4 +1,5 @@
 ---
+import type { GetImageResult } from 'astro';
 import { ViewTransitions } from "astro:transitions";
 import I18nClient from "@astrolicious/i18n/components/I18nClient.astro"
 import { getHtmlAttrs, t } from "i18n:astro";
@@ -8,7 +9,13 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import "@styles/root.less";
 
-const {description, title} = Astro.props;
+interface Props  {
+  description: string;
+  title: string;
+  preloadedImage: GetImageResult;
+}
+
+const { description, title, preloadedImage } = Astro.props as Props;
 ---
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
     <html {...getHtmlAttrs()}> <!-- Automatically generates attributes -->
@@ -24,6 +31,9 @@ const {description, title} = Astro.props;
         <meta name="description" content={description}>
         <meta name="keywords" content="">
         <link rel="canonical" href={`https://${client.domain}${Astro.url.pathname}`}>
+        
+        <!-- Preloads the image passed as a prop -->
+        <link rel="preload" href={preloadedImage.src} as="image" />
 
         <!--Social Media Display-->
         <meta property="og:title" content={title} />
