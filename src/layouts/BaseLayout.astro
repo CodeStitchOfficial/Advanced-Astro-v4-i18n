@@ -31,6 +31,7 @@ const { description, title, preloadedImage } = Astro.props as Props;
         <meta name="description" content={description}>
         <meta name="keywords" content="">
         <link rel="canonical" href={`https://${client.domain}${Astro.url.pathname}`}>
+        <link rel="sitemap" href="/sitemap-index.xml" />
         
         <!-- Preloads the image passed as a prop -->
         <link rel="preload" href={preloadedImage.src} as="image" />

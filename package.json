@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
     "@astrolicious/i18n": "^0.5.1",
     "astro": "^4.16.3",
     "astro-icon": "^1.1.1",

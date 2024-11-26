@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /admin/
 Allow: /
 
-Sitemap: https://www.yourwebsite.com/sitemap.xml
+Sitemap: https://<YOUR SITE>/sitemap-index.xml
