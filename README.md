@@ -90,6 +90,7 @@ Only the vanilla web technologies are _required_ before using this kit, with fam
 * Astro's `<ViewTransitions />` integration
 * Astro's content collections to supercharge your Astro pages and content. 
 * Accessible dropdown menus on desktop navigation and nested pages
+* Automatic sitemap generation at build time
 * [CodeStitch](https://codestitch.app/) HTML and CSS blocks to build the UI.
 * Perfect Lighthouse scores
   
@@ -99,7 +100,7 @@ This kit ships the following packages:
 * [Autoprefixer](https://www.npmjs.com/package/autoprefixer) - PostCSS plugin to parse CSS and add vendor prefixes to CSS rules using values from Can I Use. It is recommended by Google and used in Twitter and Alibaba.
 * [LESS](https://www.npmjs.com/package/less) - Less makes a few convenient additions to the CSS language, but you can also simply write standard CSS if you wish.
 * [Astrolicious i18n](https://github.com/astrolicious/i18n) -  i18n integration for Astro with server and client utilities, type safety and translations built-in.
-
+* [Astro Sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/#_top) - Automatically generates `sitemap-index.xml` and `sitemap-0.xml`. Make sure to replace `https://yourwebsite.com` with your actual site URL in `astro.config.mjs` and `robots.txt`.
 
 <a name="projectStructure"></a>
 
@@ -128,7 +129,6 @@ Astro leverages an opinionated folder layout for your project. Every Astro proje
 |   |   └── svgs/
 |   |—— _redirects
 |   |—— robots.txt
-|   └── sitemap.html
 ├── src/
 |   ├── assets/
 |   |   └── images/
@@ -169,7 +169,7 @@ Astro leverages an opinionated folder layout for your project. Every Astro proje
 
 ### Source Files and Folders
 
-- public/ - All assets you don't want or need optimized by Astro. Include fonts and favicons in here. The \_redirects, robots.txt, and sitemap.xml also live here.
+- public/ - All assets you don't want or need optimized by Astro. Include fonts and favicons in here. The \_redirects and robots.txt files also live here.
 - src/ - Raw, source code. The folder you work in.
 - .astro.config.mjs - Astro config file, already set up for you.
 
@@ -187,17 +187,13 @@ Created after running `npm build`. This will hold the final build of your site.
 #### `public/*`
 The `public/` directory is for files and assets in your project that do not need to be processed during Astro’s build process. The files in this folder will be copied into the build folder untouched, and then your site will be built.
 
-This behavior makes `public/` ideal for common assets like images and fonts, or special files such as`_redirects`, `robots.txt` and `sitemap.xml`.
 
 - \_redirects - To configure redirects. Read more on <a href="https://docs.netlify.com/routing/redirects/">Netlify</a>
 - content/ - Data to render pages from, such as the blog.
 - robots.txt - Instructions for site crawlers. Learn more, and generate your own, <a href="https://en.ryte.com/free-tools/robots-txt-generator/">here</a>
-- sitemap.xml - A map of the pages on the domain. Create your own after deployment <a href="https://www.xml-sitemaps.com/">here</a>
 
 You can place CSS and JavaScript in your public/ directory, but be aware that those files will not be bundled or optimized in your final build.
 
-##### `public/admin`
-This folder contains `config/yml`, which is where Decap CMS configuration options lives. [More information about options in Decap docs](https://decapcms.org/docs/configuration-options/)
 
 #### `src/*`
 The `src/` folder is where most of your project source code lives. This includes:
@@ -504,7 +500,7 @@ You only need to change the path of the asset you want to preload. The rest is m
 
 ## Deployment
 0. Before you deploy, it is recommended to test the build. Run `npm run build` to build the project. Once done, run `npm run preview` which you can access on http://localhost:4321/. This allows you to test your website as if it was deployed on your host.
-1. Ensure the sitemap, robots.txt and \_redirects have been filled out. Instructions and tools for how to do so can be found in the File Structure section
+1. Ensure the astro.config.mjs, client.json, robots.txt and \_redirects have been filled out and updated. 
 2. Netlify is the recommended hosting provider. If you choose another one, make sure to modify the `_redirects` code to handle the 404 page. 
 Navigate to your Netlify Admin Panel, click _Add new site | Import an existing project_
 3. Follow the instructions to connect your GitHub repository to Netlify.
