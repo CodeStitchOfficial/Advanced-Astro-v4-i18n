@@ -1,9 +1,10 @@
 ---
 import type { GetImageResult } from 'astro';
 import { ViewTransitions } from "astro:transitions";
-import I18nClient from "@astrolicious/i18n/components/I18nClient.astro"
-import { getHtmlAttrs, t } from "i18n:astro";
+import I18nClient from "@astrolicious/i18n/components/I18nClient.astro";
+import { getHtmlAttrs, getLocales, t } from "i18n:astro";
 import client from "@data/client.json";
+import { trimArrSlashes, trimStringSlashes } from "@utils/utils";
 import ThemeProvider from "@components/TemplateComponents/ThemeProvider.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -16,6 +17,14 @@ interface Props  {
 }
 
 const { description, title, preloadedImage } = Astro.props as Props;
+
+const locales = getLocales();
+// Trimming "/" from the beginning and end to handle URLs with or without trailing slashes.
+const trimmedLocales = trimArrSlashes(locales);
+const trimmedPathname = trimStringSlashes(Astro.url.pathname);
+
+const isLandingPage =
+  Astro.url.pathname === "/" || trimmedLocales.includes(trimmedPathname);
 ---
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
     <html {...getHtmlAttrs()}> <!-- Automatically generates attributes -->
@@ -60,7 +69,7 @@ const { description, title, preloadedImage } = Astro.props as Props;
         About Page - About us | Painters and Co.
         -->
         <title>
-            {Astro.url.pathname === "/" ?  (`${ title }
+            {isLandingPage ?  (`${ title }
             |
             ${ client.name }
             |
