@@ -1,10 +1,11 @@
 // 1. Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
+import { glob } from 'astro/loaders';
 
 // 2. Define a `type` and `schema` for each collection
 const blogsCollection = defineCollection({
-	type: "content",
-	schema: ({ image }) =>
+		loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/blog" }),	
+		schema: ({ image }) =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
