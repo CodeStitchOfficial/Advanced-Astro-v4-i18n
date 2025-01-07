@@ -470,7 +470,7 @@ You can of course adjust the sizes of attributes baased on your customization's 
 
 ### Astro content collections
 
-In `/src/content`, you will see a `config.ts` file. This is where you can configure [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/). This step is **not necessary**, but it will supercharge your Astro pages and content. Collections help to 
+In `/src`, you will see a `content.config.ts` file. This is where you can configure [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/). This step is **not necessary**, but it will supercharge your Astro pages and content. Collections help to 
   * organize your documents, 
   * validate your frontmatter, 
   * provide automatic TypeScript type-safety for all of your content,
@@ -503,13 +503,7 @@ You only need to change the path of the asset you want to preload. The rest is m
 1. Ensure the astro.config.mjs, client.json, robots.txt and \_redirects have been filled out and updated. 
 2. Netlify is the recommended hosting provider. If you choose another one, make sure to modify the `_redirects` code to handle the 404 page. 
 Navigate to your Netlify Admin Panel, click _Add new site | Import an existing project_
-3. Follow the instructions to connect your GitHub repository to Netlify.
-4. Once deployed, go to the project's page, click on `Site configuration` then `Identity` in the navigation, then click `Enable Identity`
-5. Invite yourself, and the client, to the site
-6. While in the Identity tab, click the "Settings and usage" button to open the settings options. Then, do the following:
-    * Go to `Registration / Registration Preferences`, and set registration from Public to Invite Only
-    * Go to `Registration / External Providers` and add a provider. We recommend Google, so the client can login with Google in 1 click.
-    * Go to `Services / Git Gateway` and enable it.
+3. Follow the instructions to connect your GitHub repository to Netlify and deploy.
 
 
 <a name="acknowledgments"></a>
