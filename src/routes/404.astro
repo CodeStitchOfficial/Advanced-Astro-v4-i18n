@@ -2,7 +2,6 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getLocalePath, t } from "i18n:astro";
 import Picture from "astro/components/Picture.astro";
-export const prerender = false;
 const title = t("notFound.pageNotFound");
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
