@@ -15,7 +15,7 @@ export const getStaticPaths = async () => {
     collectionFilters.byLocale(post, { locale }),
   );
   return posts.map((entry: any) => ({
-    params: { post: slugify(entry.slug) },
+    params: { post: slugify(entry.id) },
     props: { post: entry },
   }));
 };

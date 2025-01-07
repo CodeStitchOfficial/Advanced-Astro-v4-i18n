@@ -18,7 +18,7 @@ const featuredPosts = await getCollection("blog", ({ id, data }) => {
     {featuredPosts.length === 0 && <h2>{t("blog:noFeaturedPosts")}</h2>}
     {
       featuredPosts.map((post) => (
-        <a class="blog-feature" href={getLocalePath(`/blog/${slugify(post.slug)}`)}>
+        <a class="blog-feature" href={getLocalePath(`/blog/${slugify(post.id)}`)}>
           <picture class="blog-featureImage">
             <Image
               src={post.data.image}

@@ -6,7 +6,7 @@ import { handleI18nSlug } from "@astrolicious/i18n/content-collections";
 
 // Receiving incoming props and destructuring them
 const { post } = Astro.props;
-const { slug } = handleI18nSlug(post.slug);
+const { slug } = handleI18nSlug(post.id);
 const { title, date, description, image, imageAlt } = post.data;
 ---
 

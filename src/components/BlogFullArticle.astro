@@ -1,4 +1,6 @@
 ---
+import { render } from 'astro:content';
+
 import { Image } from "astro:assets";
 import { formatDate } from "@utils/utils.ts";
 import "@styles/markdown.less";
@@ -6,7 +8,7 @@ import "@styles/markdown.less";
 // Receiving incoming props and destructuring them
 const { post } = Astro.props;
 const { title, date, image, author, imageAlt } = post.data;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <article class="blog-article">
