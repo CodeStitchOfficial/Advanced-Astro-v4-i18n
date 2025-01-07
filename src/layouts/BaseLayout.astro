@@ -1,6 +1,6 @@
 ---
 import type { GetImageResult } from 'astro';
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import I18nClient from "@astrolicious/i18n/components/I18nClient.astro";
 import { getHtmlAttrs, getLocales, t } from "i18n:astro";
 import client from "@data/client.json";
@@ -32,7 +32,7 @@ const isLandingPage =
         <!-- i18n support -->
         <I18nClient />
         <!-- View Transitions support -->
-        <ViewTransitions />
+        <ClientRouter />
         <!-- Standard meta tags -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
