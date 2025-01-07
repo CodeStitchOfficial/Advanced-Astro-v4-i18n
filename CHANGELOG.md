@@ -1,5 +1,11 @@
 # Advanced Astro v4 i18n
 
+## 2.0.1
+
+### Patch change
+* Fix: changes file path to use alias instead of absolute path
+In blog markdown files, the images were not pulled from the right location. Using alias path `@assets` makes sure images are pulled from src. `image: "@assets/images/blog/blog-cover.jpg"`
+
 ## 2.0.0
 
 ### Major changes
