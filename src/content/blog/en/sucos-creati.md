@@ -3,7 +3,7 @@ title: Third blog post in English
 description: Lorem markdownum Talia. Carinae equis.
 author: Code Stitch
 date: 2023-06-08T15:27:34.591Z
-image: /src/assets/images/blog/blog-cover.jpg
+image: "@assets/images/blog/blog-cover.jpg"
 imageAlt: Kitchen
 tags: ["post"]
 ---
