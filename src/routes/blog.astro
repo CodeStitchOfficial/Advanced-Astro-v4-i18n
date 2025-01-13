@@ -9,12 +9,10 @@ import { getCollection } from "astro:content";
 const locale = getLocale();
 
 // Filters blog entries by locale
-// @ts-ignore
 const posts = await getCollection("blog", ({ id }) => {
     return id.startsWith(locale);
 });
 posts.sort(
-    // @ts-ignore
     (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
 );
 

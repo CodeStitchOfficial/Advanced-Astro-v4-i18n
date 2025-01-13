@@ -1,10 +1,11 @@
 ---
+defaultLocaleVersion: en/first-post-in-english
 title: Premier article de blog en français
 description: Lorem markdownum tardantis unam mitissima dissimulator inposuit   corpus sintque tura tremenda, nec coetum.
 author: Code Stitch
 date: 2023-06-08T15:26:46.705Z
 tags: ["post"]
-image: /src/assets/images/blog/blog-cover.jpg
+image: "@assets/images/blog/blog-cover.jpg"
 imageAlt: Cuisine
 ---
 
