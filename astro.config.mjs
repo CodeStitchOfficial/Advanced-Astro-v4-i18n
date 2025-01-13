@@ -12,7 +12,14 @@ export default defineConfig({
       locales: ["fr", "en"],
       client: {
         data: true,
+        paths: true,
       },
+      // used to localize the routes
+      pages: {
+				"/about": {
+					fr: "/a-propos",
+				}
+			},
     }),
     sitemap({
       i18n: {
