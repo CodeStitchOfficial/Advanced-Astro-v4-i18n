@@ -290,6 +290,7 @@ i18n({
     locales: ["fr", "en"],
     client: {
       data: true,
+      paths: true
     },
   })
 ```
@@ -424,6 +425,32 @@ import { getLocalePath } from "i18n:astro"
 // This link will take you to "/contact" or "/fr/contact" depending on the current locale
 <a href={getLocalePath("/contact")} class="cs-button-solid">Dynamic link</a>
 ```
+
+6. Localized slugs for routes and blog posts
+Localizing slugs has benefits: it increases user experience by proving them with page names that are in their language, and it improves SEO.
+
+#### Localizing slugs for routes
+We use the `pages` object in the i18n config.
+```diff
+i18n({
+      defaultLocale: "en",
+      locales: ["fr", "en"],
+      client: {
+        data: true,
+        paths: true,
+      },
+      + pages: {
+			+ 	"/about": {
+			+ 		fr: "/a-propos",
+			+ 	}
+			+ },
+    }),
+```
+
+#### Localizing slugs for blog posts
+The process is a bit different here. 
+ * rename your blog markdown files to the desired localized slug (e.g. `deuxieme-article-en-francais.md`, `second-blog-in-english.md`)
+ * create a `defaultLocaleVersion` front-matter entry in the blog posts that are not in the default locale. This entry will be used to match each blog post to its counterparts in other locales. For example, in the `deuxieme-article-en-francais.md` file, I add `defaultLocaleVersion: en/second-post-in-english` to the front-matter.
 
 <a name="Custom Picture component"></a>
 
