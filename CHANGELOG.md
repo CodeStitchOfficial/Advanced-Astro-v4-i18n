@@ -9,6 +9,7 @@ For example, we are on /blog/third-post-in-english and switch language to fr. We
 * [76f8e00](https://github.com/CodeStitchOfficial/Advanced-Astro-i18n/pull/20/commits/76f8e00ffbf009f9036652b81dfdcf5777b9cf36) - update `config.astro.mjs`
 * [720afe6](https://github.com/CodeStitchOfficial/Advanced-Astro-i18n/pull/20/commits/720afe6ed4a1d58189c5f4cf14078b63941bf903) - renamed [page] to [slug] and modified he getStaticpaths() script to use dynamicParams and localized routes
 * [acd2672](https://github.com/CodeStitchOfficial/Advanced-Astro-i18n/pull/20/commits/acd26727808a1de67634994ea1731b5a2d64c60c) - add `defaultLocaleVersion` key and renamed markdown files for localization
+* [acd2672](https://github.com/CodeStitchOfficial/Advanced-Astro-i18n/pull/20/commits/acd26727808a1de67634994ea1731b5a2d64c60c) - add `defaultLocaleVersion: reference("blog").optional(),` to your blog schema in `src/content.config.ts`
 * [cd405a8](https://github.com/CodeStitchOfficial/Advanced-Astro-i18n/pull/20/commits/cd405a8bdb2a01fff3abfd7937d077fe88a14eb5) - using getLocalePath() instead of now deleted slugify() utility function
 * [8a2e69d](https://github.com/CodeStitchOfficial/Advanced-Astro-i18n/pull/20/commits/8a2e69d457132e1b5464a655522c40a96658f10f) - delete trailing slashes to enforce proper routing
 * [3cc3d2f](renamed and changed location of the blog page) - the blog index page is now named `blog.astro` and lives in the `pages` folder (from `/blog/inddex.astro`)
