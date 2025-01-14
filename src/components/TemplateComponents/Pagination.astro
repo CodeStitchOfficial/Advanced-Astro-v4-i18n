@@ -1,0 +1,101 @@
+---
+
+const { prevUrl, currPage, nextUrl } = Astro.props;
+---
+
+{
+  (prevUrl || nextUrl) && (
+    <section class="pagination--links">
+     
+      {prevUrl && (
+        // @ts-ignore
+        <a
+          href={prevUrl}
+
+        >
+          Prev
+        </a>
+      )}
+
+      <span class="pagination--current">{currPage.toString()}</span>
+
+      {nextUrl && (
+        // @ts-ignore
+        <a
+          
+          href={nextUrl}
+
+        >
+          Next
+        </a>
+      )}
+    </section>
+  )
+}
+
+<style lang="less">
+  a {
+    text-decoration: none;
+    width: 5rem;
+    height: 2rem;
+    background-color: var(--bodyTextColorWhite);;
+    color: var(var(--bodyTextColor););
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+  .pagination--links {
+    width: 100%;
+    margin: 2em 0;
+    display: grid;
+		grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 1em;
+  }
+
+  [rel="next"] {
+      flex-direction: row-reverse;
+    }
+
+  .pagination--current {
+    padding: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    justify-self: center;
+  }
+
+
+  [data-icon="mdi--arrow-left"],
+  [data-icon="mdi--arrow-right"] {
+    transition: 0.3s;
+  }
+
+  [rel="next"]:not(.disabled) {
+    &:hover {
+      [data-icon="mdi--arrow-right"] {
+        transform: translateX(0.5em);
+      }
+    }
+  }
+
+  [rel="prev"]:not(.disabled) {
+    &:hover {
+      [data-icon="mdi--arrow-left"] {
+        transform: translateX(-0.5em);
+      }
+    }
+  }
+
+  @media only screen and (min-width: 64em) {
+    .pagination--links {
+      grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+
+    }
+
+    .pagination--button {
+      min-width: 10rem;
+    }
+  }
+</style>
