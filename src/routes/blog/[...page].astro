@@ -6,19 +6,44 @@ import BlogPreview from "@components/BlogPreview.astro";
 import { getLocale, t } from "i18n:astro";
 import { getCollection } from "astro:content";
 
-const locale = getLocale();
 
-// Filters blog entries by locale
-const posts = await getCollection("blog", ({ id }) => {
-    return id.startsWith(locale);
-});
-posts.sort(
+// // Filters blog entries by locale
+// const posts = await getCollection("blog", ({ id }) => {
+//     return id.startsWith(locale);
+// });
+// posts.sort(
+//     (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
+// );
+
+
+export const getStaticPaths = (async ({ paginate }) => {
+  // https://astro-i18n.netlify.app/reference/content-collections/collection-filters/
+  const locale = getLocalePlaceholder();
+  const posts = await getCollection("blog", (post: CollectionEntry<"blog">) =>
+    collectionFilters.byLocale(post, { locale })
+  );
+
+  const sortedPosts = posts.sort(
     (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
 );
+
+
+  // paginates with options - https://docs.astro.build/en/reference/api-reference/#paginate
+  return paginate(sortedPosts, {
+    pageSize: 3,
+  });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as { page: Page };
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import {getOptimizedImage} from "@utils/utils"
 import landingImage from "@assets/images/landing.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { collectionFilters } from "@astrolicious/i18n/content-collections";
+import { getLocalePlaceholder } from "i18n:astro";
+import Pagination from "@components/TemplateComponents/Pagination.astro";
 const optimizedImage = await getOptimizedImage(landingImage)
 ---
 
@@ -46,9 +71,15 @@ const optimizedImage = await getOptimizedImage(landingImage)
                 </div>
             </div>
             <ul class="cs-card-group">
-                {posts.length === 0 && <h2>No Recent Posts</h2>}
-                {posts.map((post: any) => <BlogPreview post={post} />)}
-            </ul>
+                {page.data.map((post) => <BlogPreview post={post} />)}
+              </ul>
+              <!-- Pagination -->
+              <Pagination
+                prevUrl={page.url.prev}
+                currPage={page.currentPage}
+                nextUrl={page.url.next}
+                lastPage={page.size}
+              />
         </div>
     </section>
 
